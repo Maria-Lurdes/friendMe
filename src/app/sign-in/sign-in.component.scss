@@ -1,0 +1,80 @@
+@import '../../assets/themes/theme.scss';
+
+.flex-wrapper-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+
+  .example-card {
+    width: 90%;
+    min-width: 320px;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .blue {
+      color: mat-color($my-theme-primary);
+      margin-top: 20px;
+    }
+
+    .title-wrapper {
+      width: 45%;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .content-wrapper {
+      width: 50%;
+      border-left: 1px solid #e0e0e0;
+      padding-left: 20px;
+    }
+
+    .mat-card-title {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(180deg, #64ADEF 0%, #3198F4 100%);
+      transform: rotate(-0.55deg);
+      color: white;
+      font-weight: 400;
+      padding-left: 60px;
+      padding-right: 60px;
+      display: flex;
+      margin: auto;
+    }
+
+    .mat-subheading-1 {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #70717B;
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .flex-wrapper-center {
+
+    .example-card {
+      .title-wrapper, .content-wrapper {
+        width: 90%;
+        border: none;
+        padding: 0;
+      }
+    }
+  }
+
+}
