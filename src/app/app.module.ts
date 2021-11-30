@@ -13,13 +13,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
