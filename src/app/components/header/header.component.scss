@@ -1,8 +1,16 @@
 .header-wrapper {
-  width: 100%;
+  width: 98%;
+  max-width: 1440px;
+  min-width: 300px;
   padding: 16px 0;
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  margin: 0;
+  left: 50%;
+  transform: translateX(-50%);
 
   .menu-icons img {
       cursor: pointer;
