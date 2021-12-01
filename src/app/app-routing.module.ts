@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
   { path: 'signin', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
-  { path: 'forget-password', component: ForgetPasswordComponent }
+  { path: 'forget-password', component: ForgetPasswordComponent },
+  { path: 'pets-dashboard', loadChildren: () => import('./pets-dashboard/pets-dashboard.module').then(m => m.PetsDashboardModule)},
 ];
 
 @NgModule({
