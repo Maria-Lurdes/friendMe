@@ -14,6 +14,10 @@
            Error: {{error}}
           </div>
 
+          <div class="alert-info" *ngIf="message">
+            {{message}}
+          </div>
+
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput type="text" formControlName="email">
