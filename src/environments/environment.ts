@@ -2,8 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
+import {Environment} from './interface';
+
+export const environment: Environment = {
+  production: false,
+  apiKey: 'AIzaSyD6gbf-oJ73HTKX6zxgCmIq0H9Ph3J5kcI',
+  fvDbUrl: 'https://angualr-blog-c5b03.firebaseio.com'
 };
 
 /*

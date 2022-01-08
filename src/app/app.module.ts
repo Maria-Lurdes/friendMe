@@ -17,6 +17,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import { OfflinePageComponent } from './offline-page/offline-page.component';
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -37,10 +38,11 @@ import { OfflinePageComponent } from './offline-page/offline-page.component';
         MatInputModule,
         MatButtonModule,
         MatIconModule,
+        SharedModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             registrationStrategy: 'registerWhenStable:30000'
-        })
+        }),
     ],
     providers: [],
     bootstrap: [AppComponent]
