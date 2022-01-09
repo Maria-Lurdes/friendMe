@@ -42,22 +42,26 @@ export class SignInComponent implements OnInit {
 
     signIn() {
         if (this.signInForm.invalid) return
-
         const user: LoginInfo = {
             email: this.signInForm.value.email,
             password: this.signInForm.value.password
         }
-
         this.submitted = true;
-
         this.auth.signIn(user).subscribe(() => {
             this.signInForm.reset()
             this.router.navigate(['/pets-dashboard'])
             this.submitted = false;
         }, () => {
-            this.submitted = false
+            this.submitted = false;
         })
+    }
 
+    googleSignIn() {
+        this.auth.googleSignIn();
+    }
+
+    facebookSignIn() {
+        this.auth.facebookSignIn();
     }
 
 }

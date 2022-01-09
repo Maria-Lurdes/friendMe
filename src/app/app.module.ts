@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
+import { initializeApp } from "firebase/app";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -15,7 +15,7 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {ForgetPasswordComponent} from './forget-password/forget-password.component';
 import {HeaderComponent} from './components/header/header.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
-import {environment} from '../environments/environment';
+import {environment, firebase} from '../environments/environment';
 import { OfflinePageComponent } from './offline-page/offline-page.component';
 import {SharedModule} from "./shared/shared.module";
 
@@ -48,4 +48,7 @@ import {SharedModule} from "./shared/shared.module";
     bootstrap: [AppComponent]
 })
 export class AppModule {
+    constructor() {
+        initializeApp(firebase);
+    }
 }

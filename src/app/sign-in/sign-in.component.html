@@ -36,6 +36,8 @@
 
           <button  [disabled]="signInForm.invalid || submitted" class="btn-gradient" mat-raised-button color="primary" (click)="signIn()">Sign in</button>
 
+          <button (click)="googleSignIn()">google</button>
+          <button (click)="facebookSignIn()">facebook</button>
           <h4 class="mat-subheading-1">Don't have an account yet? <a class="blue" href="/signup">Sign Up</a></h4>
 
         </form>

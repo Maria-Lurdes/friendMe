@@ -3,4 +3,12 @@ export interface Environment {
     production: boolean,
     fvDbUrl: string
   }
-  
+
+export interface Firebase {
+    apiKey: string
+    authDomain: string,
+    projectId: string,
+    storageBucket: string,
+    messagingSenderId: string,
+    appId: string
+}

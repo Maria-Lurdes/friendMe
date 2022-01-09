@@ -11,11 +11,11 @@ export interface User {
     returnSecureToken?: boolean
 }
 
-export interface FbAythresponse{
+export interface FbAythresponse {
     idToken: 'string',
-    expiresIn: 'string'
+    expiresIn?: 'string'
 }
 
-export interface FbCreateResponse{
+export interface FbCreateResponse {
     name: string
 }

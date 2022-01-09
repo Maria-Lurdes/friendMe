@@ -4,13 +4,19 @@ import {FbAythresponse, LoginInfo, User} from "../interfaces";
 import {Observable, Subject, throwError} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
 import {environment} from "../../../environments/environment";
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import {Router} from "@angular/router";
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
     public error$: Subject<string> = new Subject<string>()
-    constructor(private http: HttpClient) {}
+    googleProvider = new GoogleAuthProvider();
+    facebookProvider = new FacebookAuthProvider();
+    auth = getAuth();
+
+    constructor(private http: HttpClient, private router: Router) {}
 
     get token(): string {
         const expDate = new Date(localStorage.getItem('fb-token-exp'))
@@ -21,13 +27,34 @@ export class AuthService {
         return localStorage.getItem('fb-token')
     }
 
-    signIn(user: LoginInfo): Observable<any> {
+    signIn(user: LoginInfo): Observable<User> {
         user.returnSecureToken = true;
         return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
             .pipe(
                 tap(AuthService.setToken),
                 catchError(this.handleError.bind(this))
             );
+    }
+
+    googleSignIn() {
+        signInWithPopup(this.auth, this.googleProvider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                this.setGoogleFacebookToken(credential.idToken);
+            }).catch((error) => {
+            this.handleError(error);
+        });
+    }
+
+    facebookSignIn() {
+        signInWithPopup(this.auth, this.facebookProvider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                this.setGoogleFacebookToken(credential.idToken);
+            })
+            .catch((error) => {
+                this.handleError(error);
+            });
     }
 
     signUp(user: User): Observable<any> {
@@ -81,6 +108,12 @@ export class AuthService {
         } else {
             localStorage.clear()
         }
+    }
 
+    setGoogleFacebookToken(id: string) {
+            const expDate = new Date(new Date().getTime() + 3600000)
+            localStorage.setItem('fb-token', id)
+            localStorage.setItem('fb-token-exp', expDate.toString());
+            this.router.navigate(['/pets-dashboard'])
     }
 }
