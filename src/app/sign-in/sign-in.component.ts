@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {User} from "../shared/interfaces";
+import {LoginInfo} from "../shared/interfaces";
 import {AuthService} from "../shared/services/auth.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 
@@ -43,7 +43,7 @@ export class SignInComponent implements OnInit {
     signIn() {
         if (this.signInForm.invalid) return
 
-        const user: User = {
+        const user: LoginInfo = {
             email: this.signInForm.value.email,
             password: this.signInForm.value.password
         }
