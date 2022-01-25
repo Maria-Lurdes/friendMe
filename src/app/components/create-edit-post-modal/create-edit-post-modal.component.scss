@@ -1,0 +1,15 @@
+.title-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & mat-icon {
+    cursor: pointer;
+  }
+}
+
+.form-wrapper {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}

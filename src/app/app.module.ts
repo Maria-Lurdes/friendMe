@@ -18,7 +18,9 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment, firebase} from '../environments/environment';
 import { OfflinePageComponent } from './offline-page/offline-page.component';
 import {SharedModule} from "./shared/shared.module";
-
+import { CreateEditPostModalComponent } from './components/create-edit-post-modal/create-edit-post-modal.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from "@angular/material/select";
 @NgModule({
     declarations: [
         AppComponent,
@@ -26,13 +28,15 @@ import {SharedModule} from "./shared/shared.module";
         SignUpComponent,
         ForgetPasswordComponent,
         HeaderComponent,
-        OfflinePageComponent
+        OfflinePageComponent,
+        CreateEditPostModalComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         MatCardModule,
+        MatDialogModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
@@ -43,6 +47,7 @@ import {SharedModule} from "./shared/shared.module";
             enabled: environment.production,
             registrationStrategy: 'registerWhenStable:30000'
         }),
+        MatSelectModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

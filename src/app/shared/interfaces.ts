@@ -19,3 +19,12 @@ export interface FbAythresponse {
 export interface FbCreateResponse {
     name: string
 }
+
+export  interface Post {
+    avatar: string,
+    age: number,
+    sex: string,
+    weight: number,
+    name: string,
+    description: string,
+}

@@ -1,0 +1,49 @@
+<h2 class="title-wrapper" mat-dialog-title>
+    <span><ng-container *ngIf="customPost; else create">Edit</ng-container>
+    <ng-template #create>Create</ng-template> Post </span>
+    <mat-icon matSuffix (click)="closeModal()">close</mat-icon>
+</h2>
+
+<mat-dialog-content class="mat-typography">
+    <form class="form-wrapper" [formGroup]="petPost">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Age</mat-label>
+            <input min="0" max="100" matInput type="number" formControlName="age">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Weight</mat-label>
+            <input min="0" matInput type="number" formControlName="age">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Sex</mat-label>
+            <mat-select formControlName="sex">
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Weight</mat-label>
+            <input min="0" matInput type="text" formControlName="avatar">
+            <mat-icon matSuffix>folder</mat-icon>
+        </mat-form-field>
+
+        <button [disabled]="petPost.invalid || submitted" mat-raised-button color="primary" (click)="submit()">Sign in
+        </button>
+
+    </form>
+
+</mat-dialog-content>
