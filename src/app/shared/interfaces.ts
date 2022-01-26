@@ -21,7 +21,7 @@ export interface FbCreateResponse {
 }
 
 export  interface Post {
-    avatar: string,
+    avatar?: string,
     age: number,
     sex: string,
     weight: number,

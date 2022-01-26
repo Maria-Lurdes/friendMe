@@ -37,7 +37,7 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Weight</mat-label>
-            <input min="0" matInput type="text" formControlName="avatar">
+            <input min="0" matInput type="text" (change)="setFileName($event)">
             <mat-icon matSuffix>folder</mat-icon>
         </mat-form-field>
 

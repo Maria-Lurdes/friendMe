@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, Provider} from '@angular/core';
 import { initializeApp } from "firebase/app";
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -21,6 +21,15 @@ import {SharedModule} from "./shared/shared.module";
 import { CreateEditPostModalComponent } from './components/create-edit-post-modal/create-edit-post-modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./shared/services/auth.interceptor";
+
+const INTERCEPTOR_PROVIDER: Provider = {
+    provide: HTTP_INTERCEPTORS,
+    multi: true,
+    useClass: AuthInterceptor
+}
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -49,7 +58,7 @@ import {MatSelectModule} from "@angular/material/select";
         }),
         MatSelectModule,
     ],
-    providers: [],
+    providers: [INTERCEPTOR_PROVIDER],
     bootstrap: [AppComponent]
 })
 export class AppModule {

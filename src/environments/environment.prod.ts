@@ -3,7 +3,7 @@ import {Environment, Firebase} from './interface';
 export const environment: Environment = {
   production: true,
   apiKey: 'AIzaSyAofgZmramgZbKEfGmZSqM_x1MUtztpdeY',
-  fvDbUrl: 'https://angualr-blog-c5b03.firebaseio.com'
+  fvDbUrl: 'https://friendme-c87e3-default-rtdb.firebaseio.com'
 };
 
 export const firebase: Firebase = {
