@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {PostService} from "../../shared/services/posts.service";
 import {AlertService} from "../../shared/services/alert.service";
+import {FileService} from "../../shared/services/file.service";
 
 @Component({
     selector: 'app-create-edit-post-modal',
@@ -16,12 +17,12 @@ export class CreateEditPostModalComponent implements OnInit {
     customPost: Post;
     petPost: FormGroup;
     submitted = false;
-    filename = [''];
-    uploadData = new FormData();
+    petAvatar: FileList;
 
     constructor(public dialogRef: MatDialogRef<CreateEditPostModalComponent>,
                 public postService: PostService,
-                private alert: AlertService) {
+                private alert: AlertService,
+                private fileService: FileService) {
     }
 
     ngOnInit(): void {
@@ -31,6 +32,7 @@ export class CreateEditPostModalComponent implements OnInit {
             age: new FormControl(null, [Validators.required]),
             sex: new FormControl(null, [Validators.required]),
             weight: new FormControl(null, [Validators.required]),
+            type: new FormControl(null, [Validators.required]),
         })
     }
 
@@ -45,31 +47,25 @@ export class CreateEditPostModalComponent implements OnInit {
             age: this.petPost.value.age,
             sex: this.petPost.value.sex,
             weight: this.petPost.value.weight,
+            type: this.petPost.value.type
         }
 
-        this.postService.createPost(post).subscribe(() => {
-            this.petPost.reset()
-            this.alert.success('Post was created')
+        this.postService.createPost(post).subscribe((data: Post) => {
+            const file = this.petAvatar.item(0);
+            this.fileService.pushFileToStorage(data.id, file);
+            this.petPost.reset();
+            this.closeModal();
+            this.alert.success('Post was created');
         })
-
     };
 
-    setFileName(e): void {
-        if (e.target.files[0]?.size > 500000) {
-            // TODO: error message
-            // this.toaster.error('Your file is bigger than 500ko. Please, choose another one.');
-        } else {
-            this.filename = [];
-            this.filename = e.target.files;
-            this.uploadData = new FormData();
-            this.uploadData.set('file', this.filename[0]);
-
-            // const reader = new FileReader();
-            // reader.onload = () => {
-            //   this.widgetSettings.eventEmailSettings.imageUrl = reader.result as string;
-            // };
-            // reader.readAsDataURL(e.target.files[0]);
-        }
+    setFile(e): void {
+            if (e.target.files[0].size > 5000000) {
+                this.alert.warning('Your file is bigger than 500ko. Please, choose another one.');
+                // TODO: test error message
+            } else {
+                this.petAvatar = e.target.files;
+            }
     }
 
 }

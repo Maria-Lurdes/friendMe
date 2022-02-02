@@ -1,7 +1,8 @@
 export interface Environment {
     apiKey: string,
     production: boolean,
-    fvDbUrl: string
+    fvDbUrl: string,
+    fvStUrl: string
   }
 
 export interface Firebase {

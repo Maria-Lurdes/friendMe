@@ -54,6 +54,7 @@ export class SignInComponent implements OnInit {
         }, () => {
             this.submitted = false;
         })
+        // TODO: add finaly for this.submitted = false;
     }
 
     googleSignIn() {

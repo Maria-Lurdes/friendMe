@@ -24,7 +24,16 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Weight</mat-label>
-            <input min="0" matInput type="number" formControlName="age">
+            <input min="0" matInput type="number" formControlName="weight">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option value="cat">Cat</mat-option>
+                <mat-option value="dog">Dog</mat-option>
+                <mat-option value="horse">Horse</mat-option>
+            </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -35,13 +44,16 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Weight</mat-label>
-            <input min="0" matInput type="text" (change)="setFileName($event)">
-            <mat-icon matSuffix>folder</mat-icon>
-        </mat-form-field>
+        <label class="custom-file-upload">
+            <input accept="image/png, image/jpeg" type="file" (change)="setFile($event)"/>
+                <mat-icon matSuffix>folder</mat-icon>
+                Upload image for pet
+        </label>
 
-        <button [disabled]="petPost.invalid || submitted" mat-raised-button color="primary" (click)="submit()">Sign in
+<!--        <p class="file-name" *ngIf="petAvatar">{{petAvatar.name}}</p>-->
+
+        <button [disabled]="petPost.invalid || submitted" mat-raised-button color="primary" (click)="submit()">
+            Create Pet
         </button>
 
     </form>

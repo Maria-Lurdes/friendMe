@@ -23,6 +23,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from "@angular/material/select";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/services/auth.interceptor";
+import {AlertService} from "./shared/services/alert.service";
+import {AlertComponent} from "./components/alert/alert.component";
 
 const INTERCEPTOR_PROVIDER: Provider = {
     provide: HTTP_INTERCEPTORS,
@@ -38,7 +40,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
         ForgetPasswordComponent,
         HeaderComponent,
         OfflinePageComponent,
-        CreateEditPostModalComponent
+        CreateEditPostModalComponent,
+        AlertComponent
     ],
     imports: [
         BrowserModule,
@@ -58,7 +61,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
         }),
         MatSelectModule,
     ],
-    providers: [INTERCEPTOR_PROVIDER],
+    providers: [INTERCEPTOR_PROVIDER, AlertService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
