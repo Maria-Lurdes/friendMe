@@ -6,6 +6,10 @@
   margin: auto;
 }
 
+.mat-progress-bar {
+  margin-bottom: 20px;
+}
+
 .find-block {
   width: 100%;
   position: relative;
@@ -156,5 +160,11 @@
         margin: 0;
       }
     }
+  }
+
+  .pets-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 }

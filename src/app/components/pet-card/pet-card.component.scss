@@ -1,0 +1,82 @@
+.card {
+  border-radius: 25px;
+  width: 305px;
+  height: 360px;
+  background-size: 80% !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  margin-right: 20px;
+
+  &.green {
+    background: #E2F5CB;
+  }
+
+  &.orange {
+    background: #FFE9C2;
+  }
+
+  &.blue {
+    background: #C2EBFF;
+  }
+
+  & .mat-card-title {
+    display: flex;
+    justify-content: space-between;
+
+    & span {
+      display: flex;
+      align-items: center;
+
+      & mat-icon {
+        margin-left: 5px;
+        cursor: pointer;
+      }
+    }
+
+    & .goTo {
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & mat-icon {
+        font-size: 35px;
+        width: 35px;
+        height: 35px;
+      }
+    }
+  }
+
+  & .mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    & .delete-block {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 7px;
+      cursor: pointer;
+
+
+      & mat-icon {
+        font-size: 25px;
+        width: 25px;
+        height: 25px;
+        color: #FC5252;
+      }
+    }
+  }
+}

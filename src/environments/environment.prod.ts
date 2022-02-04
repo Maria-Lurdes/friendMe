@@ -3,7 +3,8 @@ import {Environment, Firebase} from './interface';
 export const environment: Environment = {
   production: true,
   apiKey: 'AIzaSyAofgZmramgZbKEfGmZSqM_x1MUtztpdeY',
-  fvDbUrl: 'https://friendme-c87e3-default-rtdb.firebaseio.com'
+  fvDbUrl: 'https://friendme-c87e3-default-rtdb.firebaseio.com',
+  fvStUrl: 'gs://friendme-c87e3.appspot.com'
 };
 
 export const firebase: Firebase = {

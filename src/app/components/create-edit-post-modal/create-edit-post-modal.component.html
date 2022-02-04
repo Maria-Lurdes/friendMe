@@ -50,7 +50,7 @@
                 Upload image for pet
         </label>
 
-<!--        <p class="file-name" *ngIf="petAvatar">{{petAvatar.name}}</p>-->
+        <p class="file-name" *ngIf="avatarName">{{avatarName}}</p>
 
         <button [disabled]="petPost.invalid || submitted" mat-raised-button color="primary" (click)="submit()">
             Create Pet

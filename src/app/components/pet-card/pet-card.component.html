@@ -1,0 +1,13 @@
+<mat-card class="card" [ngClass]="petPost.color" [style.background-image]="'url('+petPost.avatar+')'">
+    <mat-card-title>
+        <span>{{petPost.name}} <mat-icon>edit</mat-icon></span>
+        <div class="goTo">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
+    </mat-card-title>
+    <mat-card-actions>
+       <div class="delete-block">
+           <mat-icon>delete</mat-icon>
+       </div>
+    </mat-card-actions>
+</mat-card>
