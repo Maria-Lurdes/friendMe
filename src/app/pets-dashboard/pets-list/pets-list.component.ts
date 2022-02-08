@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PostService} from "../../shared/services/post.service";
 import {Subscription} from "rxjs";
 import {Post} from "../../shared/interfaces";
@@ -12,10 +12,6 @@ import {getDownloadURL, getStorage, listAll, ref} from "firebase/storage";
 export class PetsListComponent implements OnInit {
 
   constructor(private postService: PostService) { }
-
-  @ViewChild('cat', { read: ElementRef, static:false }) cat: ElementRef;
-  @ViewChild('dog', { read: ElementRef, static:false }) dog: ElementRef;
-  @ViewChild('horse', { read: ElementRef, static:false }) horse: ElementRef;
 
   posts: Post[] = []
   postSub: Subscription
