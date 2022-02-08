@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PostService} from "../../shared/services/post.service";
 import {Subscription} from "rxjs";
 import {Post} from "../../shared/interfaces";
-import { listAll, getDownloadURL, getStorage, ref } from "firebase/storage";
+import {getDownloadURL, getStorage, listAll, ref} from "firebase/storage";
 
 @Component({
   selector: 'app-pets-list',
@@ -13,11 +13,15 @@ export class PetsListComponent implements OnInit {
 
   constructor(private postService: PostService) { }
 
+  @ViewChild('cat', { read: ElementRef, static:false }) cat: ElementRef;
+  @ViewChild('dog', { read: ElementRef, static:false }) dog: ElementRef;
+  @ViewChild('horse', { read: ElementRef, static:false }) horse: ElementRef;
+
   posts: Post[] = []
-  initialPosts: Post[] = []
   postSub: Subscription
   destroySub: Subscription
   imageUrl: string
+  filterPetByType = 'all'
 
   ngOnInit(): void {
     this.getAllPets()
@@ -25,14 +29,12 @@ export class PetsListComponent implements OnInit {
 
   getAllPets() {
     this.postSub = this.postService.getAll().subscribe(posts => {
-      this.setPostsByColor(posts);
-      // this.posts = posts
-      // this.initialPosts = posts
-      // this.getImageUrl();
+      this.posts = this.getPostsByColor(posts);
+      this.getImageUrl();
     })
   }
 
-  setPostsByColor(posts) {
+  getPostsByColor(posts) {
     let updatedPosts = [];
     posts.forEach((item, index) => {
       let post = item;
@@ -49,9 +51,8 @@ export class PetsListComponent implements OnInit {
       }
       updatedPosts.push(post);
     })
-    this.posts = updatedPosts
-    this.initialPosts = updatedPosts
-    this.getImageUrl();
+
+    return updatedPosts;
   }
 
   getImageUrl() {

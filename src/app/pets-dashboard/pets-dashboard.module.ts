@@ -9,6 +9,7 @@ import {PetCardComponent} from "../components/pet-card/pet-card.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
     declarations: [PetsListComponent, PetInfoComponent, PetCardComponent],
@@ -18,7 +19,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         MatButtonModule,
         MatCardModule,
         MatIconModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        SharedModule
     ],
     providers: [AuthGuard]
 })
