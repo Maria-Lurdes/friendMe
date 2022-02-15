@@ -63,6 +63,7 @@ export class CreateEditPostModalComponent implements OnInit {
                 this.submitted = false;
                 this.petPost.reset();
                 this.closeModal();
+                this.postService.getAll();
                 this.alert.success('Post was created');
             })
         })

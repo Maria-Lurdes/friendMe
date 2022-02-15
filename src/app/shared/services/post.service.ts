@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import {FbCreateResponse, Post} from "../interfaces";
 import {environment} from "../../../environments/environment";
 import { map } from 'rxjs/operators';
@@ -9,6 +9,8 @@ import {Injectable} from "@angular/core";
 export class PostService {
     constructor(private http: HttpClient) {
     }
+
+    public petPostsArray = new Subject<Post[]>();
 
     createPost(post: Post): Observable<Post>{
         return this.http.post(`${environment.fvDbUrl}/posts.json`, post)
@@ -20,7 +22,7 @@ export class PostService {
             }))
     }
 
-    getAll(): Observable<Post[]>{
+    getAll(): Subscription{
         return this.http.get(`${environment.fvDbUrl}/posts.json`)
             .pipe(map((response: {[key: string]: any}) => {
                 return Object
@@ -28,9 +30,12 @@ export class PostService {
                     .map(key => ({
                         ...response[key],
                         id: key,
-                        date: new Date(response[key].date)
                     }))
             }))
+            .subscribe(data => {
+                console.log(data)
+                this.petPostsArray.next(data);
+            })
     }
 
     getById(id: string): Observable<Post>{

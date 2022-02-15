@@ -20,14 +20,19 @@ export class PetsListComponent implements OnInit {
   filterPetByType = 'all'
 
   ngOnInit(): void {
-    this.getAllPets()
+    this.getAllPets();
+    this.getCurrentPosts();
+  }
+
+  getCurrentPosts() {
+    this.postService.petPostsArray.subscribe(currentPosts => {
+      this.posts = this.getPostsByColor(currentPosts);
+      this.getImageUrl();
+    })
   }
 
   getAllPets() {
-    this.postSub = this.postService.getAll().subscribe(posts => {
-      this.posts = this.getPostsByColor(posts);
-      this.getImageUrl();
-    })
+    this.postService.getAll();
   }
 
   getPostsByColor(posts) {
@@ -65,16 +70,6 @@ export class PetsListComponent implements OnInit {
         }).catch((error) => {
           // TODO: error message
     });
-  }
-
-  ngOnDestroy() {
-    if (this.postSub) {
-      this.postSub.unsubscribe()
-    }
-
-    if(this.destroySub){
-      this.destroySub.unsubscribe()
-    }
   }
 
 }
