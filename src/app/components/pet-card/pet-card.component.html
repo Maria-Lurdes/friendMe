@@ -1,6 +1,6 @@
 <mat-card class="card" [ngClass]="petPost.color" [style.background-image]="'url('+petPost.avatar+')'">
     <mat-card-title>
-        <span>{{petPost.name}} <mat-icon>edit</mat-icon></span>
+        <span>{{petPost.name}} <mat-icon (click)="openEditFormModal()" >edit</mat-icon></span>
         <div class="goTo">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </div>

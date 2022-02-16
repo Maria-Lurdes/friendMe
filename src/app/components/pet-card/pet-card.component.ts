@@ -3,6 +3,8 @@ import {Post} from "../../shared/interfaces";
 import {PostService} from "../../shared/services/post.service";
 import {AlertService} from "../../shared/services/alert.service";
 import {getStorage, ref, deleteObject} from "firebase/storage";
+import {CreateEditPostModalComponent} from "../create-edit-post-modal/create-edit-post-modal.component";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-pet-card',
@@ -11,7 +13,7 @@ import {getStorage, ref, deleteObject} from "firebase/storage";
 })
 export class PetCardComponent implements OnInit {
 
-  constructor(public postService: PostService, private alert: AlertService) { }
+  constructor(public dialog: MatDialog, public postService: PostService, private alert: AlertService) { }
 
   @Input()
   petPost: Post;
@@ -31,5 +33,11 @@ export class PetCardComponent implements OnInit {
         });
     })
   }
+
+    openEditFormModal() {
+        let config = new MatDialogConfig();
+        let dialogRef:MatDialogRef<CreateEditPostModalComponent> = this.dialog.open(CreateEditPostModalComponent, config);
+        dialogRef.componentInstance.postToEdit = this.petPost;
+    }
 
 }

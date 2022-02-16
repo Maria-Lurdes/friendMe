@@ -54,8 +54,8 @@ export class PostService {
         return this.http.delete<void>(`${environment.fvDbUrl}/posts/${id}.json`)
     }
 
-    update(post: Post): Observable<Post>{
-        return this.http.patch<Post>(`${environment.fvDbUrl}/posts/${post.id}.json`, post)
+    updatePost(id: string, post: Post): Observable<Post>{
+        return this.http.patch<Post>(`${environment.fvDbUrl}/posts/${id}.json`, post)
     }
 
 }
