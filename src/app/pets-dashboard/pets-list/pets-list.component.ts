@@ -3,6 +3,7 @@ import {PostService} from "../../shared/services/post.service";
 import {Subscription} from "rxjs";
 import {Post} from "../../shared/interfaces";
 import {getDownloadURL, getStorage, listAll, ref} from "firebase/storage";
+import {AlertService} from "../../shared/services/alert.service";
 
 @Component({
   selector: 'app-pets-list',
@@ -11,7 +12,7 @@ import {getDownloadURL, getStorage, listAll, ref} from "firebase/storage";
 })
 export class PetsListComponent implements OnInit {
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private alert: AlertService) { }
 
   posts: Post[] = []
   postSub: Subscription
@@ -27,7 +28,7 @@ export class PetsListComponent implements OnInit {
   getCurrentPosts() {
     this.postService.petPostsArray.subscribe(currentPosts => {
       this.posts = this.getPostsByColor(currentPosts);
-      this.getImageUrl();
+      if( currentPosts.length) this.getImageUrl();
     })
   }
 
@@ -67,8 +68,8 @@ export class PetsListComponent implements OnInit {
               this.posts[index].avatar = url;
             })
           });
-        }).catch((error) => {
-          // TODO: error message
+        }).catch(() => {
+          this.alert.danger('Smth went wrong, try again later');
     });
   }
 
