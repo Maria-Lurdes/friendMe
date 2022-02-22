@@ -1,13 +1,16 @@
 <mat-card class="card" [ngClass]="petPost.color" [style.background-image]="'url('+petPost.avatar+')'">
     <mat-card-title>
-        <span>{{petPost.name}} <mat-icon (click)="openEditFormModal()" >edit</mat-icon></span>
-        <div class="goTo">
+        <span>{{petPost.name}}
+            <mat-icon (click)="openEditFormModal()">edit</mat-icon></span>
+        <div class="goTo"
+             [routerLink]="['/pets-dashboard', 'pet-info', petPost.id]">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </div>
     </mat-card-title>
+    a
     <mat-card-actions>
-       <div class="delete-block">
-           <mat-icon (click)="removePost()">delete</mat-icon>
-       </div>
+        <div class="delete-block">
+            <mat-icon (click)="removePost()">delete</mat-icon>
+        </div>
     </mat-card-actions>
 </mat-card>

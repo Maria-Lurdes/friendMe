@@ -1,1 +1,57 @@
-<p>pet-info works!</p>
+<div class="align-wrapper">
+    <mat-card class="pet-wrapper" *ngIf="post?.avatar; else loading">
+
+        <img class="paw1" src="../../../assets/images/lapka.png" alt=""/>
+        <img class="paw2" src="../../../assets/images/lapka.png" alt=""/>
+
+        <div class="goTo"
+             [routerLink]="['/pets-dashboard']">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </div>
+
+        <img *ngIf="post?.avatar" class="pet-avatar" [src]="post.avatar" alt=""/>
+
+        <div class="description-block">
+            <div class="top-container">
+                <div class="name">
+                    <p>{{post.name}}</p>
+                </div>
+
+                <div class="blocks">
+                    <div class="block green">
+                        <p class="bold">{{post.sex}}</p>
+                        <p class="small">Sex</p>
+                        <img class="paw-image" src="./assets/images/greenPaw.png" alt="">
+                    </div>
+
+                    <div class="block orange">
+                        <p class="bold">{{post.age}} Year</p>
+                        <p class="small">Age</p>
+                        <img class="paw-image" src="./assets/images/orangePaw.png" alt="">
+                    </div>
+
+                    <div class="block blue">
+                        <p class="bold">{{post.weight}}kg</p>
+                        <p class="small">Weight</p>
+                        <img class="paw-image" src="./assets/images/bluePaw.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <p>{{post.description}}</p>
+            </div>
+
+            <div class="btn-block">
+                <button mat-raised-button class="sponsor">Sponsor Me</button>
+                <button mat-raised-button class="adopt">Adopt Me</button>
+            </div>
+
+        </div>
+    </mat-card>
+
+    <ng-template #loading>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </ng-template>
+
+</div>

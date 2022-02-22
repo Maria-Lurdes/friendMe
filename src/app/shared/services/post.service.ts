@@ -33,7 +33,6 @@ export class PostService {
                     }))
             }))
             .subscribe(data => {
-                console.log(data)
                 this.petPostsArray.next(data);
             })
     }

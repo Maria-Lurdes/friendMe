@@ -6,7 +6,7 @@ import {AuthGuard} from "../shared/services/auth.guard";
 
 const routes: Routes = [
     {path: '', component: PetsListComponent, canActivate: [AuthGuard]},
-    {path: 'pet-info', component: PetInfoComponent, canActivate: [AuthGuard]}
+    {path: 'pet-info/:id', component: PetInfoComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
