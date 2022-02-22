@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AlertService } from '../../shared/services/alert.service';
 import { Subscription } from 'rxjs';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-alert',
@@ -8,24 +9,18 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent implements OnInit , OnDestroy{
-
-  @Input() delay = 5000
-
-  public text: string
-  public type = 'success'
-
   aSub: Subscription
-  constructor(private alertService: AlertService) { }
+  constructor(private alertService: AlertService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.aSub =  this.alertService.alert$.subscribe(alert => {
-      this.text = alert.text
-      this.type = alert.type
-
-      const timeout = setTimeout(() => {
-        clearTimeout(timeout)
-        this.text = ''
-      }, this.delay);
+      this._snackBar.open(alert.text, '', {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: alert.type
+      });
     })
   }
 

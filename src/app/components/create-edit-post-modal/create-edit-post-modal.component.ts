@@ -84,7 +84,7 @@ export class CreateEditPostModalComponent implements OnInit {
         this.petPost.reset();
         this.closeModal();
         this.postService.getAll();
-        this.alert.success('Success!');
+        this.alert.success('Changes are successfully saved!');
     }
 
     updatePostImage() {

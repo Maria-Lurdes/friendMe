@@ -25,6 +25,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/services/auth.interceptor";
 import {AlertService} from "./shared/services/alert.service";
 import {AlertComponent} from "./components/alert/alert.component";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const INTERCEPTOR_PROVIDER: Provider = {
     provide: HTTP_INTERCEPTORS,
@@ -60,6 +61,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
             registrationStrategy: 'registerWhenStable:30000'
         }),
         MatSelectModule,
+        MatSnackBarModule
     ],
     providers: [INTERCEPTOR_PROVIDER, AlertService],
     bootstrap: [AppComponent]
