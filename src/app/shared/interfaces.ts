@@ -31,3 +31,10 @@ export  interface Post {
     description: string,
     type: string
 }
+
+export interface ContactForm {
+    id: string,
+    name: string,
+    phone: string,
+    type: string
+}

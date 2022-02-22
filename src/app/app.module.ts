@@ -26,6 +26,7 @@ import {AuthInterceptor} from "./shared/services/auth.interceptor";
 import {AlertService} from "./shared/services/alert.service";
 import {AlertComponent} from "./components/alert/alert.component";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ContactModalComponent } from './components/contact-modal/contact-modal.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
     provide: HTTP_INTERCEPTORS,
@@ -42,7 +43,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
         HeaderComponent,
         OfflinePageComponent,
         CreateEditPostModalComponent,
-        AlertComponent
+        AlertComponent,
+        ContactModalComponent
     ],
     imports: [
         BrowserModule,

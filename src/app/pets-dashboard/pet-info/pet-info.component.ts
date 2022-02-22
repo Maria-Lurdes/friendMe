@@ -6,6 +6,8 @@ import {switchMap} from "rxjs/operators";
 import {Post} from "../../shared/interfaces";
 import {Subscription} from "rxjs";
 import {getDownloadURL, getStorage, ref} from "firebase/storage";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
+import {ContactModalComponent} from "../../components/contact-modal/contact-modal.component";
 
 @Component({
     selector: 'app-pet-info',
@@ -19,7 +21,8 @@ export class PetInfoComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private alert: AlertService,
-                private postsService: PostService,) {
+                private postsService: PostService,
+                public dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -40,6 +43,13 @@ export class PetInfoComponent implements OnInit {
         getDownloadURL(pathRef).then(url => {
             this.post.avatar = url;
         })
+    }
+
+    openContactFormModal(type) {
+        let config = new MatDialogConfig();
+        let dialogRef:MatDialogRef<ContactModalComponent> = this.dialog.open(ContactModalComponent, config);
+        dialogRef.componentInstance.petId = this.post.id;
+        dialogRef.componentInstance.type = type;
     }
 
     ngOnDestroy() {
