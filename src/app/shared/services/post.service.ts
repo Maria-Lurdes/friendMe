@@ -1,8 +1,8 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable, Subject, Subscription} from "rxjs";
-import {FbCreateResponse, Post} from "../interfaces";
+import {ContactForm, FbCreateResponse, Post} from "../interfaces";
 import {environment} from "../../../environments/environment";
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Injectable} from "@angular/core";
 
 @Injectable({providedIn:'root'})
@@ -46,15 +46,16 @@ export class PostService {
                 }
             }))
     }
-
-
-
     remove(id: string): Observable<void>{
         return this.http.delete<void>(`${environment.fvDbUrl}/posts/${id}.json`)
     }
 
     updatePost(id: string, post: Post): Observable<Post>{
         return this.http.patch<Post>(`${environment.fvDbUrl}/posts/${id}.json`, post)
+    }
+
+    saveContactForm(contact: ContactForm): Observable<ContactForm>{
+        return this.http.post<ContactForm>(`${environment.fvDbUrl}/contacts.json`, contact);
     }
 
 }
