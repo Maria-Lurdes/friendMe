@@ -9,12 +9,8 @@
       <mat-card-content>
         <form [formGroup]="signUpForm">
 
-          <div class="alert-danger" *ngIf="auth.error$ | async as error">
-            Error: {{error}}
-          </div>
-
           <mat-form-field appearance="outline">
-            <mat-label>DisplayName</mat-label>
+            <mat-label>Display Name</mat-label>
             <input matInput type="text" formControlName="displayName">
           </mat-form-field>
 

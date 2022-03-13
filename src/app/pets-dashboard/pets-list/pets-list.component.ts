@@ -21,7 +21,7 @@ export class PetsListComponent implements OnInit {
   filterPetByType = 'all'
 
   ngOnInit(): void {
-    this.getAllPets();
+this.getAllPets();
     this.getCurrentPosts();
   }
 

@@ -16,7 +16,6 @@ import {ForgetPasswordComponent} from './forget-password/forget-password.compone
 import {HeaderComponent} from './components/header/header.component';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment, firebase} from '../environments/environment';
-import { OfflinePageComponent } from './offline-page/offline-page.component';
 import {SharedModule} from "./shared/shared.module";
 import { CreateEditPostModalComponent } from './components/create-edit-post-modal/create-edit-post-modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -41,7 +40,6 @@ const INTERCEPTOR_PROVIDER: Provider = {
         SignUpComponent,
         ForgetPasswordComponent,
         HeaderComponent,
-        OfflinePageComponent,
         CreateEditPostModalComponent,
         AlertComponent,
         ContactModalComponent

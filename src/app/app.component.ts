@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "./shared/services/auth.service";
+import {AlertService} from "./shared/services/alert.service";
 
 @Component({
     selector: 'app-root',
@@ -10,13 +11,13 @@ import {AuthService} from "./shared/services/auth.service";
 export class AppComponent {
     title: string = 'friendMe';
 
-    constructor(private router: Router, public auth: AuthService) {
+    constructor(private router: Router, public auth: AuthService, private alert: AlertService) {
         this.checkInternetConnection();
     }
 
     checkInternetConnection() {
         if (!window.navigator.onLine) {
-            this.router.navigate(['/offline']);
+            this.alert.danger('You are offline')
         }
     }
 }

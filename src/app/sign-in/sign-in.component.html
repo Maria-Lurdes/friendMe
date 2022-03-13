@@ -10,10 +10,6 @@
       <mat-card-content>
         <form [formGroup]="signInForm">
 
-          <div class="alert-danger" *ngIf="auth.error$ | async as error">
-           Error: {{error}}
-          </div>
-
           <div class="alert-info" *ngIf="message">
             {{message}}
           </div>
