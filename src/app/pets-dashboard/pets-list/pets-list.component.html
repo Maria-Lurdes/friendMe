@@ -9,7 +9,7 @@
             <p>Find Your
                 <br>
                 Best Friend</p>
-            <button class="btn-gradient" mat-raised-button color="primary">Find my bestie</button>
+            <button (click)="scrollToPetList()" class="btn-gradient" mat-raised-button color="primary">Find my bestie</button>
         </div>
         <img class="cat" src="../../../assets/images/blackKitten.png" alt=""/>
     </div>
@@ -17,7 +17,7 @@
 
 <div class="white-container">
     <div class="page-wrapper">
-        <div class="list-container">
+        <div class="list-container" id="pets-list">
             <div class="categories-block">
                 <p class="title-categories">
                     Categories

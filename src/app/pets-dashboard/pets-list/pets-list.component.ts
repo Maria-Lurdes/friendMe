@@ -36,6 +36,10 @@ this.getAllPets();
     this.postService.getAll();
   }
 
+  scrollToPetList() {
+    document.getElementById('pets-list').scrollIntoView();
+  }
+
   getPostsByColor(posts) {
     let updatedPosts = [];
     posts.forEach((item, index) => {
