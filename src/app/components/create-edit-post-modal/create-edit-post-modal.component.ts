@@ -62,21 +62,22 @@ export class CreateEditPostModalComponent implements OnInit {
             })
         } else {
             this.postService.createPost(post).subscribe((data: Post) => {
-                this.uploadImageToStorage(data.id);
-            })
+                    this.uploadImageToStorage(data.id);
+                },
+                () => this.submitted = false)
         }
     };
 
     uploadImageToStorage(id) {
-        const file = this.petAvatar.item(0);
-        let url = ref(this.fireStorage, `pets-avatars/${id}`);
-        const metadata = {
-            contentType: 'image/jpeg',
-        };
+            const file = this.petAvatar.item(0);
+            let url = ref(this.fireStorage, `pets-avatars/${id}`);
+            const metadata = {
+                contentType: 'image/jpeg',
+            };
 
-        uploadBytes(url, file, metadata).then(() => {
-            this.completeRequest();
-        })
+            uploadBytes(url, file, metadata).then(() => {
+                this.completeRequest();
+            }, () => this.submitted = false)
     }
 
     completeRequest() {
