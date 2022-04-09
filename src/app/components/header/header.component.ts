@@ -11,10 +11,13 @@ import {CreateEditPostModalComponent} from "../create-edit-post-modal/create-edi
 })
 export class HeaderComponent implements OnInit {
 
+    isAdmin: boolean = false;
+
     constructor(public dialog: MatDialog, public auth: AuthService, private router: Router) {
     }
 
     ngOnInit(): void {
+        this.isAdmin = localStorage.getItem('role') === 'admin';
     }
 
     signOut(event: Event) {
@@ -24,7 +27,7 @@ export class HeaderComponent implements OnInit {
     }
 
     openFormModal() {
-      this.dialog.open(CreateEditPostModalComponent);
+        this.dialog.open(CreateEditPostModalComponent);
     }
 
 }

@@ -47,7 +47,13 @@ export class SignInComponent implements OnInit {
             password: this.signInForm.value.password
         }
         this.submitted = true;
-        this.auth.signIn(user).subscribe(() => {
+        this.auth.signIn(user).subscribe((response) => {
+            if(response.email === 'admin@gmail.com') {
+                localStorage.setItem('role', 'admin')
+            } else {
+                localStorage.setItem('role', 'user')
+            }
+            console.log(response, 'response')
             this.signInForm.reset()
             this.router.navigate(['/pets-dashboard'])
             this.submitted = false;
