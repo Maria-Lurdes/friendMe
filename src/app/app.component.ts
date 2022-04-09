@@ -16,8 +16,8 @@ export class AppComponent {
     }
 
     checkInternetConnection() {
-        if (!window.navigator.onLine) {
-            this.alert.danger('You are offline')
-        }
+        window.addEventListener('offline', () => {
+            this.alert.danger("Ooops! Looks like you're offline. Please, check your internet connection.")
+        });
     }
 }
