@@ -58,4 +58,8 @@ export class PostService {
         return this.http.post<ContactForm>(`${environment.fvDbUrl}/contacts.json`, contact);
     }
 
+    getRandomFact() {
+        return this.http.get(`https://api.fungenerators.com/fact/random`);
+    }
+
 }

@@ -1,0 +1,22 @@
+<div class="user-wrapper-card">
+<mat-card class="card">
+    <mat-card-title>
+        <div class="info-block">
+            <img src="../../assets/images/circle-cat.png" alt="">
+            <div>
+                <p>{{user.displayName}}</p>
+                <span>{{user.email}}</span>
+            </div>
+        </div>
+    </mat-card-title>
+    <mat-card-actions>
+
+        <div class="btn-block">
+            <button mat-raised-button class="email" (click)="changeEmail()">Change Email</button>
+            <button mat-raised-button class="password" (click)="changePassword()">Change Password</button>
+        </div>
+    </mat-card-actions>
+</mat-card>
+
+</div>
+

@@ -1,0 +1,55 @@
+.user-wrapper-card {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .card {
+    margin: auto;
+    width: 670px;
+    background: #C2EBFF;
+    box-shadow: 0 48.0205px 144.061px rgba(0, 0, 0, 0.07), 0 20.0618px 60.1854px rgba(0, 0, 0, 0.0503198), 0 10.726px 32.178px rgba(0, 0, 0, 0.0417275), 0 6.01291px 18.0387px rgba(0, 0, 0, 0.035), 0 3.19341px 9.58024px rgba(0, 0, 0, 0.0282725), 0 1.32885px 3.98655px rgba(0, 0, 0, 0.0196802);
+    border-radius: 40px;
+    padding: 30px;
+
+    .info-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      margin-top: 20px;
+
+      div {
+        margin-left: 30px;
+      }
+    }
+
+    .btn-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .email {
+        background: linear-gradient(180deg, #FDD153 0%, #F5C02D 100%);
+        border-radius: 17px;
+        color: #FFFFFF;
+        font-weight: 400;
+        font-size: 16.7028px;
+        width: 270px;
+        height: 58px;
+        margin-right: 20px;
+      }
+      .password {
+        background: linear-gradient(180deg, #64ADEF 0%, #3198F4 100%);
+        border-radius: 17px;
+        color: #FFFFFF;
+        font-weight: 400;
+        font-size: 16.7028px;
+        width: 270px;
+        height: 58px;
+      }
+    }
+  }
+}

@@ -48,6 +48,7 @@ export class SignInComponent implements OnInit {
         }
         this.submitted = true;
         this.auth.signIn(user).subscribe((response) => {
+            localStorage.setItem('userInfo', JSON.stringify(response))
             if(response.email === 'admin@gmail.com') {
                 localStorage.setItem('role', 'admin')
             } else {
