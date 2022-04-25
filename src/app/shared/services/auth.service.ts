@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {FbAythresponse, LoginInfo, User} from "../interfaces";
-import {Observable, Subject, throwError} from "rxjs";
+import {Observable, throwError} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
 import {environment} from "../../../environments/environment";
-import {getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, signInWithCustomToken} from "firebase/auth";
+import {getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider} from "firebase/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
 
