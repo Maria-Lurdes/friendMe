@@ -27,6 +27,7 @@ import {AlertComponent} from "./components/alert/alert.component";
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContactModalComponent } from './components/contact-modal/contact-modal.component';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { EditInfoModalComponent } from './user-account/edit-info-modal/edit-info-modal.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
     provide: HTTP_INTERCEPTORS,
@@ -44,7 +45,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
         CreateEditPostModalComponent,
         AlertComponent,
         ContactModalComponent,
-        UserAccountComponent
+        UserAccountComponent,
+        EditInfoModalComponent
     ],
     imports: [
         BrowserModule,
