@@ -1,10 +1,17 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {FbAythresponse, LoginInfo, User} from "../interfaces";
+import {LoginInfo, User} from "../interfaces";
 import {Observable, throwError} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
 import {environment} from "../../../environments/environment";
-import {getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider} from "firebase/auth";
+import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider,
+    FacebookAuthProvider,
+    createUserWithEmailAndPassword,
+    updateProfile
+} from "firebase/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
 
@@ -32,7 +39,7 @@ export class AuthService {
         user.returnSecureToken = true;
         return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
             .pipe(
-                tap(AuthService.setToken),
+                tap(this.setToken),
                 catchError(this.handleError.bind(this))
             );
     }
@@ -56,21 +63,47 @@ export class AuthService {
             });
     }
 
-    signUp(user: User): Observable<any> {
-        user.returnSecureToken = true;
-        return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`, user)
-            .pipe(
-                tap(AuthService.setToken),
-                catchError(this.handleError.bind(this))
-            );
+    async signUpUser(email, password, displayName) {
+        try {
+            await createUserWithEmailAndPassword(this.auth, email, password);
+            await updateProfile(this.auth.currentUser, {displayName})
+            const idToken = await this.auth.currentUser.getIdToken();
+            this.setToken(idToken);
+            this.router.navigate(['/pets-dashboard'])
+
+        } catch (error) {
+            this.handleAuthError(error.code);
+        }
     }
 
     signOut() {
-        AuthService.setToken(null)
+        this.setToken(null)
     }
 
     isAuthenticated(): boolean {
         return !!this.token
+    }
+
+    private handleAuthError(errorCode: string) {
+        switch (errorCode) {
+            case 'auth/email-already-exists':
+                this.alert.danger('The provided email is already in use by an existing user. Each user must have a unique email.')
+                break
+            case 'auth/invalid-email':
+                this.alert.danger('The provided value for the email user property is invalid. It must be a string email address.')
+                break
+            case 'auth/invalid-password':
+                this.alert.danger('The provided value for the password user property is invalid. It must be a string with at least six characters.')
+                break
+            case 'auth/uid-already-exists':
+                this.alert.danger('The provided uid is already in use by an existing user. Each user must have a unique uid.')
+                break
+            case 'auth/network-request-failed':
+                this.alert.danger('There is problem with your network.')
+                break
+            default:
+                this.alert.warning('Smth went wrong, try again later.')
+        }
     }
 
     private handleError(error: HttpErrorResponse) {
@@ -102,10 +135,10 @@ export class AuthService {
         return throwError(error)
     }
 
-    private static setToken(response: FbAythresponse | null) {
+    setToken(response: string) {
         if (response) {
-            const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000)
-            localStorage.setItem('fb-token', response.idToken)
+            const expDate = new Date(new Date().getTime() +3600 * 1000)
+            localStorage.setItem('fb-token', response)
             localStorage.setItem('fb-token-exp', expDate.toString())
         } else {
             localStorage.clear()
