@@ -49,12 +49,12 @@ export class SignInComponent implements OnInit {
         await this.auth.signIn(user);
     }
 
-    googleSignIn() {
-        this.auth.googleSignIn();
+    async googleSignIn() {
+        await this.auth.googleSignIn();
     }
 
-    facebookSignIn() {
-        this.auth.facebookSignIn();
+    async facebookSignIn() {
+        await this.auth.facebookSignIn();
     }
 
 }

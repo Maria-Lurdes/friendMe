@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 import {
     getAuth,
     signInWithPopup,
@@ -36,26 +35,25 @@ export class AuthService {
         return localStorage.getItem('fb-token')
     }
 
-    googleSignIn() {
-        signInWithPopup(this.auth, this.googleProvider)
-            .then(() => {
-                this.setGoogleFacebookToken();
-            }).catch((error) => {
-            this.handleError(error);
-        });
+    async googleSignIn() {
+        try {
+            await signInWithPopup(this.auth, this.googleProvider);
+            this.setGoogleFacebookToken();
+        } catch (error) {
+            this.handleAuthError(error.code);
+        }
     }
 
-    facebookSignIn() {
-        signInWithPopup(this.auth, this.facebookProvider)
-            .then(() => {
-                this.setGoogleFacebookToken();
-            })
-            .catch((error) => {
-                this.handleError(error);
-            });
+    async facebookSignIn() {
+        try {
+            await signInWithPopup(this.auth, this.facebookProvider);
+            this.setGoogleFacebookToken()
+        } catch (error) {
+            this.handleAuthError(error.code);
+        }
     }
 
-    async signUpUser(email, password, displayName) {
+    async signUpUser(email: string, password: string, displayName: string) {
         try {
             await createUserWithEmailAndPassword(this.auth, email, password);
             await updateProfile(this.auth.currentUser, {displayName})
@@ -65,11 +63,10 @@ export class AuthService {
         }
     }
 
-    async sendPasswordResetEmail(email) {
+    async sendPasswordResetEmail(email: string) {
         try {
             await sendPasswordResetEmail(this.auth, email);
             this.alert.success('Check your email to reset your password.')
-
         } catch (error) {
             this.handleAuthError(error.code);
         }
@@ -127,35 +124,6 @@ export class AuthService {
             default:
                 this.alert.danger('Smth went wrong, try again later.')
         }
-    }
-
-    private handleError(error: HttpErrorResponse) {
-        const {message} = error.error.error;
-        switch (message) {
-            case 'INVALID_EMAIL':
-                this.alert.danger('Wrong email.')
-                break
-            case 'INVALID_PASSWORD':
-                this.alert.danger('Wrong password.')
-                break
-            case 'EMAIL_NOT_FOUND':
-                this.alert.danger('Such email does not exist.')
-                break
-            case 'EMAIL_EXISTS':
-                this.alert.danger('The email address is already in use by another account.')
-                break
-            case 'OPERATION_NOT_ALLOWED':
-                this.alert.danger('Password sign-in is disabled for this project.')
-                break
-            case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-                this.alert.danger('We have blocked all requests from this device due to unusual activity. Try again later.')
-                break
-            default:
-                this.alert.warning(error.error.error.message)
-
-        }
-
-        return throwError(error)
     }
 
     setToken(response: string) {
