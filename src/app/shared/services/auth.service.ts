@@ -8,11 +8,12 @@ import {
     FacebookAuthProvider,
     createUserWithEmailAndPassword,
     updateProfile,
-    signInWithEmailAndPassword
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail
 } from "firebase/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
-import {LoginInfo} from "../interfaces";
+import {LoginInfo, UserAuthInfo} from "../interfaces";
 
 @Injectable({
     providedIn: 'root',
@@ -21,6 +22,7 @@ export class AuthService {
     googleProvider = new GoogleAuthProvider();
     facebookProvider = new FacebookAuthProvider();
     auth = getAuth();
+    public userMainInfo: UserAuthInfo;
 
     constructor(private alert: AlertService, private http: HttpClient, private router: Router) {
     }
@@ -63,17 +65,27 @@ export class AuthService {
         }
     }
 
+    async sendPasswordResetEmail(email) {
+        try {
+            await sendPasswordResetEmail(this.auth, email);
+            this.alert.success('Check your email to reset your password.')
+
+        } catch (error) {
+            this.handleAuthError(error.code);
+        }
+    }
+
     async signIn(user: LoginInfo) {
         try {
             await signInWithEmailAndPassword(this.auth, user.email, user.password);
-            await this.setTokenAndNavigate()
-            if(this.auth.currentUser.email === 'admin@gmail.com') {
+            await this.setTokenAndNavigate();
+            this.userMainInfo = this.auth.currentUser;
+            if (this.auth.currentUser.email === 'admin@gmail.com') {
                 localStorage.setItem('role', 'admin')
             } else {
                 localStorage.setItem('role', 'user')
             }
         } catch (error) {
-            console.log(error.code, 'error')
             this.handleAuthError(error.code);
         }
     }
@@ -148,7 +160,7 @@ export class AuthService {
 
     setToken(response: string) {
         if (response) {
-            const expDate = new Date(new Date().getTime() +3600 * 1000)
+            const expDate = new Date(new Date().getTime() + 3600 * 1000)
             localStorage.setItem('fb-token', response)
             localStorage.setItem('fb-token-exp', expDate.toString())
         } else {

@@ -20,6 +20,11 @@ export interface FbCreateResponse {
     name: string
 }
 
+export interface UserAuthInfo {
+    email: string,
+    displayName: string
+}
+
 export  interface Post {
     id?: string,
     avatar?: string,
