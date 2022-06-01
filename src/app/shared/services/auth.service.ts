@@ -1,19 +1,18 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {LoginInfo, User} from "../interfaces";
-import {Observable, throwError} from "rxjs";
-import {catchError, tap} from "rxjs/operators";
-import {environment} from "../../../environments/environment";
+import {throwError} from "rxjs";
 import {
     getAuth,
     signInWithPopup,
     GoogleAuthProvider,
     FacebookAuthProvider,
     createUserWithEmailAndPassword,
-    updateProfile
+    updateProfile,
+    signInWithEmailAndPassword
 } from "firebase/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
+import {LoginInfo} from "../interfaces";
 
 @Injectable({
     providedIn: 'root',
@@ -33,15 +32,6 @@ export class AuthService {
             return null
         }
         return localStorage.getItem('fb-token')
-    }
-
-    signIn(user: LoginInfo): Observable<User> {
-        user.returnSecureToken = true;
-        return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
-            .pipe(
-                tap(this.setToken),
-                catchError(this.handleError.bind(this))
-            );
     }
 
     googleSignIn() {
@@ -67,13 +57,31 @@ export class AuthService {
         try {
             await createUserWithEmailAndPassword(this.auth, email, password);
             await updateProfile(this.auth.currentUser, {displayName})
-            const idToken = await this.auth.currentUser.getIdToken();
-            this.setToken(idToken);
-            this.router.navigate(['/pets-dashboard'])
-
+            await this.setTokenAndNavigate()
         } catch (error) {
             this.handleAuthError(error.code);
         }
+    }
+
+    async signIn(user: LoginInfo) {
+        try {
+            await signInWithEmailAndPassword(this.auth, user.email, user.password);
+            await this.setTokenAndNavigate()
+            if(this.auth.currentUser.email === 'admin@gmail.com') {
+                localStorage.setItem('role', 'admin')
+            } else {
+                localStorage.setItem('role', 'user')
+            }
+        } catch (error) {
+            console.log(error.code, 'error')
+            this.handleAuthError(error.code);
+        }
+    }
+
+    async setTokenAndNavigate() {
+        const idToken = await this.auth.currentUser.getIdToken();
+        this.setToken(idToken);
+        this.router.navigate(['/pets-dashboard'])
     }
 
     signOut() {
@@ -101,8 +109,11 @@ export class AuthService {
             case 'auth/network-request-failed':
                 this.alert.danger('There is problem with your network.')
                 break
+            case 'auth/wrong-password':
+                this.alert.danger('Wrong password.')
+                break
             default:
-                this.alert.warning('Smth went wrong, try again later.')
+                this.alert.danger('Smth went wrong, try again later.')
         }
     }
 

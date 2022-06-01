@@ -40,27 +40,13 @@ export class SignInComponent implements OnInit {
         })
     }
 
-    signIn() {
+    async signIn() {
         if (this.signInForm.invalid) return
         const user: LoginInfo = {
             email: this.signInForm.value.email,
             password: this.signInForm.value.password
         }
-        this.submitted = true;
-        this.auth.signIn(user).subscribe((response) => {
-            localStorage.setItem('userInfo', JSON.stringify(response))
-            if(response.email === 'admin@gmail.com') {
-                localStorage.setItem('role', 'admin')
-            } else {
-                localStorage.setItem('role', 'user')
-            }
-            console.log(response, 'response')
-            this.signInForm.reset()
-            this.router.navigate(['/pets-dashboard'])
-            this.submitted = false;
-        }, () => {
-            this.submitted = false;
-        })
+        await this.auth.signIn(user);
     }
 
     googleSignIn() {
