@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
-import {LoginInfo, UserAuthInfo} from "../interfaces";
+import {LoginInfo} from "../interfaces";
 
 @Injectable({
     providedIn: 'root',
@@ -21,7 +21,6 @@ export class AuthService {
     googleProvider = new GoogleAuthProvider();
     facebookProvider = new FacebookAuthProvider();
     auth = getAuth();
-    public userMainInfo: UserAuthInfo;
 
     constructor(private alert: AlertService, private http: HttpClient, private router: Router) {
     }
@@ -63,6 +62,17 @@ export class AuthService {
         }
     }
 
+    async updateUserProfile (updatedUser) {
+        try {
+            await updateProfile(this.auth.currentUser, updatedUser)
+            const idToken = await this.auth.currentUser.getIdToken();
+            this.setToken(idToken);
+            this.alert.success('Your profile is successfully updated.')
+        } catch(error) {
+            this.handleAuthError(error.code);
+        }
+    }
+
     async sendPasswordResetEmail(email: string) {
         try {
             await sendPasswordResetEmail(this.auth, email);
@@ -76,7 +86,6 @@ export class AuthService {
         try {
             await signInWithEmailAndPassword(this.auth, user.email, user.password);
             await this.setTokenAndNavigate();
-            this.userMainInfo = this.auth.currentUser;
             if (this.auth.currentUser.email === 'admin@gmail.com') {
                 localStorage.setItem('role', 'admin')
             } else {
@@ -138,7 +147,7 @@ export class AuthService {
 
     setGoogleFacebookToken() {
         this.auth.currentUser.getIdTokenResult().then((result) => {
-            const expDate = new Date(new Date().getTime() + 3600000)
+            const expDate = new Date(new Date().getTime() + 3600 * 1000)
             localStorage.setItem('fb-token', result.token)
             localStorage.setItem('fb-token-exp', expDate.toString());
             this.router.navigate(['/pets-dashboard'])

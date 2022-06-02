@@ -14,7 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
         private router: Router) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log(this.auth, 'this.auth')
         if (this.auth.isAuthenticated()) {
             req = req.clone({
                 setParams: {

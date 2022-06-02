@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
-import {AlertService} from "../../shared/services/alert.service";
+import {UserAuthInfo} from "../../shared/interfaces";
 import {AuthService} from "../../shared/services/auth.service";
-import {updateProfile, getAuth, User, onAuthStateChanged, updateCurrentUser} from 'firebase/auth';
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 @Component({
     selector: 'app-edit-info-modal',
@@ -16,25 +16,28 @@ export class EditInfoModalComponent implements OnInit {
     petId: string
     updatedInfo: FormGroup;
     submitted = false;
-    auth = getAuth();
-    authUser = {};
+    user: UserAuthInfo;
+    firebasAuth = getAuth();
 
     constructor(public dialogRef: MatDialogRef<EditInfoModalComponent>,
-                public authService: AuthService,
-                private alert: AlertService) {
+                public auth: AuthService) {
     }
 
     ngOnInit(): void {
-        console.log(this.auth.currentUser, 'current user')
-        // this.auth.onAuthStateChanged(user => {
-        //     console.log(user, 'user')
-        //     if (user) {
-        //         // User is signed in.
-        //     }
-        //     else {
-        //         // User is signed out.
-        //     }
-        // })
+        onAuthStateChanged(this.firebasAuth, (user) => {
+            if (user) {
+                this.user = user;
+                this.updatedInfo = new FormGroup({
+                    email: new FormControl(this.user.email, [
+                        Validators.required,
+                        Validators.email
+                    ]),
+                    displayName: new FormControl(this.user.displayName, [
+                        Validators.required,
+                    ])
+                })
+            }
+        });
     }
 
     closeModal() {
@@ -42,7 +45,11 @@ export class EditInfoModalComponent implements OnInit {
     }
 
     async submit() {
-        // await updateCurrentUser(this.auth, {displayName: 'test edited'})
+        await this.auth.updateUserProfile({
+            email: this.updatedInfo.value.email,
+            displayName: this.updatedInfo.value.displayName
+        });
+        this.closeModal();
     }
 
 }

@@ -1,6 +1,6 @@
 import {HttpClient} from "@angular/common/http";
 import {Observable, Subject, Subscription} from "rxjs";
-import {ContactForm, FbCreateResponse, Post} from "../interfaces";
+import {CatQuote, ContactForm, FbCreateResponse, Post} from "../interfaces";
 import {environment} from "../../../environments/environment";
 import {map} from 'rxjs/operators';
 import {Injectable} from "@angular/core";
@@ -58,8 +58,8 @@ export class PostService {
         return this.http.post<ContactForm>(`${environment.fvDbUrl}/contacts.json`, contact);
     }
 
-    getRandomFact() {
-        return this.http.get(`https://api.fungenerators.com/fact/random`);
+    getRandomFact(): Observable<CatQuote[]> {
+        return this.http.get<CatQuote[]>(`https://cat-fact.herokuapp.com/facts`);
     }
 
 }

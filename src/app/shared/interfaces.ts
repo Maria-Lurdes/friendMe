@@ -22,7 +22,8 @@ export interface FbCreateResponse {
 
 export interface UserAuthInfo {
     email: string,
-    displayName: string
+    displayName: string,
+    photoURL?: string,
 }
 
 export  interface Post {
@@ -35,6 +36,10 @@ export  interface Post {
     name: string,
     description: string,
     type: string
+}
+
+export interface CatQuote {
+    text: string
 }
 
 export interface ContactForm {

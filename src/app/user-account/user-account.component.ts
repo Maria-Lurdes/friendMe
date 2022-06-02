@@ -1,45 +1,46 @@
 import {Component, OnInit, Sanitizer} from '@angular/core';
-import {User} from "../shared/interfaces";
+import {UserAuthInfo} from "../shared/interfaces";
 import {PostService} from "../shared/services/post.service";
-import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {ContactModalComponent} from "../components/contact-modal/contact-modal.component";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {EditInfoModalComponent} from "./edit-info-modal/edit-info-modal.component";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
+import {AuthService} from "../shared/services/auth.service";
 
 @Component({
-  selector: 'app-user-account',
-  templateUrl: './user-account.component.html',
-  styleUrls: ['./user-account.component.scss']
+    selector: 'app-user-account',
+    templateUrl: './user-account.component.html',
+    styleUrls: ['./user-account.component.scss']
 })
 export class UserAccountComponent implements OnInit {
 
-  user: User;
-  imageUrl;
+    user: UserAuthInfo;
+    randomCatQuote: string;
+    firebasAuth = getAuth();
 
-  constructor(public postService: PostService, public sanitizer: Sanitizer, public dialog: MatDialog) { }
+    constructor(public auth: AuthService, public postService: PostService, public sanitizer: Sanitizer, public dialog: MatDialog) {
+    }
 
-  ngOnInit(): void {
-    this.getRandomFact();
-    this.user = JSON.parse(localStorage.getItem('userInfo'));
-  }
+    ngOnInit(): void {
+        this.getRandomFact();
+        onAuthStateChanged(this.firebasAuth, (user) => {
+            if (user) {
+                this.user = user;
+            }
+        });
+    }
 
-  editInfo() {
-    let config = new MatDialogConfig();
-    let dialogRef:MatDialogRef<EditInfoModalComponent> = this.dialog.open(EditInfoModalComponent, config);
-  }
+    getRandomFact() {
+        this.postService.getRandomFact().subscribe((quotesList) => {
+            this.randomCatQuote = quotesList[0].text;
+        })
+    }
 
-  // openContactFormModal(type) {
-  //   let config = new MatDialogConfig();
-  //   let dialogRef:MatDialogRef<ContactModalComponent> = this.dialog.open(ContactModalComponent, config);
-  //   dialogRef.componentInstance.petId = this.post.id;
-  //   dialogRef.componentInstance.type = type;
-  // }
+    editInfo() {
+        let config = new MatDialogConfig();
+        this.dialog.open(EditInfoModalComponent, config);
+    }
 
-  changePassword() {}
+    changePassword() {
+    }
 
-  getRandomFact() {
-    this.postService.getRandomFact().subscribe((data) => {
-      console.log(data, 'data');
-    })
-
-  }
 }
