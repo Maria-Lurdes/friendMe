@@ -38,7 +38,7 @@ export class PetsListComponent implements OnInit {
     }
 
     scrollToPetList() {
-        document.getElementById('pets-list').scrollIntoView();
+        document.getElementById('pets-list').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     getPostsByColor(posts) {
