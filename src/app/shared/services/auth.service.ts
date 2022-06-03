@@ -74,8 +74,9 @@ export class AuthService {
     }
 
     async sendPasswordResetEmail(email: string) {
+        let userEmail = email ? email : this.auth.currentUser.email;
         try {
-            await sendPasswordResetEmail(this.auth, email);
+            await sendPasswordResetEmail(this.auth, userEmail);
             this.alert.success('Check your email to reset your password.')
         } catch (error) {
             this.handleAuthError(error.code);
@@ -111,8 +112,12 @@ export class AuthService {
     }
 
     private handleAuthError(errorCode: string) {
+        console.log(errorCode, 'errorCode')
         switch (errorCode) {
             case 'auth/email-already-exists':
+                this.alert.danger('The provided email is already in use by an existing user. Each user must have a unique email.')
+                break
+            case 'auth/email-already-in-use':
                 this.alert.danger('The provided email is already in use by an existing user. Each user must have a unique email.')
                 break
             case 'auth/invalid-email':

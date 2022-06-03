@@ -5,6 +5,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {EditInfoModalComponent} from "./edit-info-modal/edit-info-modal.component";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 import {AuthService} from "../shared/services/auth.service";
+import {EditPassModalComponent} from "./edit-pass-modal/edit-pass-modal.component";
 
 @Component({
     selector: 'app-user-account',
@@ -41,6 +42,8 @@ export class UserAccountComponent implements OnInit {
     }
 
     changePassword() {
+        let config = new MatDialogConfig();
+        this.dialog.open(EditPassModalComponent, config);
     }
 
 }

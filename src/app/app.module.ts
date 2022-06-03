@@ -28,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ContactModalComponent } from './components/contact-modal/contact-modal.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { EditInfoModalComponent } from './user-account/edit-info-modal/edit-info-modal.component';
+import { EditPassModalComponent } from './user-account/edit-pass-modal/edit-pass-modal.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
     provide: HTTP_INTERCEPTORS,
@@ -46,7 +47,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
         AlertComponent,
         ContactModalComponent,
         UserAccountComponent,
-        EditInfoModalComponent
+        EditInfoModalComponent,
+        EditPassModalComponent
     ],
     imports: [
         BrowserModule,

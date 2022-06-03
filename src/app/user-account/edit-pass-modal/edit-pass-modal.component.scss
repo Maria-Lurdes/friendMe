@@ -1,0 +1,30 @@
+.title-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & mat-icon {
+    cursor: pointer;
+  }
+}
+
+h2 {
+  font-size: 26px;
+  color: #03063A;
+}
+
+h4 {
+  font-size: 16px;
+  color: #70717B;
+}
+
+.form-wrapper {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    margin-top: 30px;
+  }
+
+}
