@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
-import {LoginInfo} from "../interfaces";
+import {LoginInfo, UserAuthInfo} from "../interfaces";
 
 @Injectable({
     providedIn: 'root',
@@ -62,7 +62,7 @@ export class AuthService {
         }
     }
 
-    async updateUserProfile (updatedUser) {
+    async updateUserProfile (updatedUser: UserAuthInfo) {
         try {
             await updateProfile(this.auth.currentUser, updatedUser)
             const idToken = await this.auth.currentUser.getIdToken();

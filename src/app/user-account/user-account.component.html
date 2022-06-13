@@ -2,7 +2,7 @@
 <mat-card class="card">
     <mat-card-title>
         <p *ngIf="randomCatQuote" class="quote" >😺 {{randomCatQuote}} 😺</p>
-        <div class="info-block">
+        <div *ngIf="user" class="info-block">
             <img src='{{user?.photoURL ? user?.photoURL : "../../assets/images/userAvatar.png"}}' alt="">
             <div>
                 <p>{{user?.displayName}}</p>

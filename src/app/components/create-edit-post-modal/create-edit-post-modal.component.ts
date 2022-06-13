@@ -28,7 +28,6 @@ export class CreateEditPostModalComponent implements OnInit {
     ngOnInit(): void {
         this.petPost = new FormGroup({
             name: new FormControl(this.postToEdit ? this.postToEdit.name : null, [Validators.required]),
-            // TODO: max length
             description: new FormControl(this.postToEdit ? this.postToEdit.description : null, [Validators.required]),
             age: new FormControl(this.postToEdit ? this.postToEdit.age : null, [Validators.required]),
             sex: new FormControl(this.postToEdit ? this.postToEdit.sex : null, [Validators.required]),

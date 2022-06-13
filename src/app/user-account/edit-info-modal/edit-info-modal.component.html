@@ -16,6 +16,14 @@
             <input matInput type="text" formControlName="email">
         </mat-form-field>
 
+        <label class="custom-file-upload">
+            <input accept="image/png, image/jpeg" type="file" (change)="setFile($event)"/>
+            <mat-icon matSuffix>folder</mat-icon>
+            Upload new avatar for user
+        </label>
+
+        <p class="file-name" *ngIf="avatarName">{{avatarName}}</p>
+
         <button
                 [disabled]="updatedInfo.invalid || submitted"
                 mat-raised-button

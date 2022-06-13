@@ -27,4 +27,27 @@ h4 {
     margin-top: 30px;
   }
 
+  .file-name {
+    text-align: center;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+  .custom-file-upload {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+    line-height: 36px;
+    align-items: center;
+    border-radius: 4px;
+
+    mat-icon {
+      margin-right: 5px;
+    }
+  }
+
 }
