@@ -19,7 +19,7 @@
         </mat-form-field>
 
 
-        <button
+        <button [ngClass]="type === 'sponsoring' ? 'yellow-btn' : 'blue-btn'"
                 [disabled]="contactsForm.invalid || submitted"
                 mat-raised-button
                 color="primary"
