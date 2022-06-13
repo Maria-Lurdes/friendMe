@@ -81,6 +81,7 @@
   .flex-wrapper-center {
 
     .example-card {
+      justify-content: space-evenly;
       .title-wrapper, .content-wrapper {
         width: 90%;
         border: none;
