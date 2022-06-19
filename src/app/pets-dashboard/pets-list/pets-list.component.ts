@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {PostService} from "../../shared/services/post.service";
-import {Subscription} from "rxjs";
 import {Post} from "../../shared/interfaces";
 import {getDownloadURL, getStorage, listAll, ref} from "firebase/storage";
 import {AlertService} from "../../shared/services/alert.service";
+import {AuthService} from "../../shared/services/auth.service";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 @Component({
     selector: 'app-pets-list',
@@ -12,18 +13,39 @@ import {AlertService} from "../../shared/services/alert.service";
 })
 export class PetsListComponent implements OnInit {
 
-    constructor(private postService: PostService, private alert: AlertService) {
+    constructor(private postService: PostService,private authService: AuthService, private alert: AlertService) {
     }
 
     posts: Post[] = []
-    postSub: Subscription
-    destroySub: Subscription
-    imageUrl: string
     filterPetByType = 'all'
+    userId: string = ''
+    auth = getAuth();
+    favouritesList: string[] = [];
 
     ngOnInit(): void {
+        this.getChosenPets();
         this.getAllPets();
         this.getCurrentPosts();
+        this.getUserId();
+        this.getFavouritePetsList();
+    }
+
+    getFavouritePetsList() {
+        this.authService.favouritesPetsList.subscribe(list => {
+            this.favouritesList = list;
+        })
+    }
+
+    getUserId() {
+        onAuthStateChanged(this.auth, (user) => {
+            if (user) {
+               this.userId = user.uid;
+            }
+        });
+    }
+
+    getChosenPets() {
+        this.authService.getFavourites();
     }
 
     getCurrentPosts() {

@@ -3,9 +3,9 @@
         <span>{{petPost.name}}
             <mat-icon *ngIf="isAdmin" (click)="openEditFormModal()">edit</mat-icon></span>
         <div class="icons-block">
-            <div class="goTo heart">
-<!--                <img src="../../../assets/icons/heart-filled.png" alt="">-->
-                <img src="../../../assets/icons/heart-outlined.png" alt="">
+            <div class="goTo heart" (click)="addRemoveToFavoirites()">
+                <img *ngIf="!isFavourite" src="../../../assets/icons/heart-outlined.png" alt="">
+                <img *ngIf="isFavourite" src="../../../assets/icons/heart-filled.png" alt="">
             </div>
             <div class="goTo"
                  [routerLink]="['/pets-dashboard', 'pet-info', petPost.id]">

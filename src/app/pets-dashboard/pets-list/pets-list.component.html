@@ -46,6 +46,8 @@
                 <app-pet-card
                         *ngFor="let post of posts | filterType:filterPetByType"
                         [petPost]="post"
+                        [userId]="userId"
+                        [favouritesList]="favouritesList"
                 ></app-pet-card>
             </div>
 

@@ -8,11 +8,12 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
     signInWithEmailAndPassword,
-    sendPasswordResetEmail
+    sendPasswordResetEmail, onAuthStateChanged
 } from "firebase/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
 import {LoginInfo, UserAuthInfo} from "../interfaces";
+import {Subject} from "rxjs";
 
 @Injectable({
     providedIn: 'root',
@@ -22,7 +23,18 @@ export class AuthService {
     facebookProvider = new FacebookAuthProvider();
     auth = getAuth();
 
+    public favouritesPetsList = new Subject<string[]>();
+
     constructor(private alert: AlertService, private http: HttpClient, private router: Router) {
+    }
+
+    getFavourites(): void {
+        onAuthStateChanged(this.auth, (user) => {
+            if (user) {
+                let userSettings = JSON.parse(localStorage.getItem(user.uid));
+                if (userSettings) this.favouritesPetsList.next(userSettings);
+            }
+        });
     }
 
     get token(): string {
