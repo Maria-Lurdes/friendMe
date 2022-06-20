@@ -10,9 +10,10 @@ import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {SharedModule} from "../shared/shared.module";
+import { FavouritesPetsComponent } from './favourites-pets/favourites-pets.component';
 
 @NgModule({
-    declarations: [PetsListComponent, PetInfoComponent, PetCardComponent],
+    declarations: [PetsListComponent, PetInfoComponent, PetCardComponent, FavouritesPetsComponent],
     imports: [
         CommonModule,
         PetsDashboardRoutingModule,

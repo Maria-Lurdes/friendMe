@@ -124,7 +124,6 @@ export class AuthService {
     }
 
     private handleAuthError(errorCode: string) {
-        console.log(errorCode, 'errorCode')
         switch (errorCode) {
             case 'auth/email-already-exists':
                 this.alert.danger('The provided email is already in use by an existing user. Each user must have a unique email.')
@@ -158,7 +157,8 @@ export class AuthService {
             localStorage.setItem('fb-token', response)
             localStorage.setItem('fb-token-exp', expDate.toString())
         } else {
-            localStorage.clear()
+            localStorage.removeItem('fb-token');
+            localStorage.removeItem('fb-token-exp');
         }
     }
 

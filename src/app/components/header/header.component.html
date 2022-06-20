@@ -3,7 +3,7 @@
         <button routerLink="/pets-dashboard">Friend.me</button>
 
         <div class="menu-icons">
-            <img *ngIf="isAdmin" src="../../../assets/icons/heart-outlined.png" alt="" (click)="openFormModal()"/>
+            <img src="../../../assets/icons/heart-outlined.png" alt="" routerLink="/pets-dashboard/favourites"/>
             <img *ngIf="isAdmin" src="../../../assets/icons/add.png" alt="" (click)="openFormModal()"/>
             <img src="../../../assets/images/userIcon.png" alt="" routerLink="/user-account"/>
             <img src="../../../assets/icons/log-out.png" alt="" (click)="signOut($event)"/>

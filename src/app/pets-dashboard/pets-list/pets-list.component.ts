@@ -19,8 +19,8 @@ export class PetsListComponent implements OnInit {
     posts: Post[] = []
     filterPetByType = 'all'
     userId: string = ''
-    auth = getAuth();
-    favouritesList: string[] = [];
+    auth = getAuth()
+    favouritesList: string[] = []
 
     ngOnInit(): void {
         this.getChosenPets();

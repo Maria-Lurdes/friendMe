@@ -46,6 +46,7 @@ export class PostService {
                 }
             }))
     }
+
     remove(id: string): Observable<void>{
         return this.http.delete<void>(`${environment.fvDbUrl}/posts/${id}.json`)
     }
