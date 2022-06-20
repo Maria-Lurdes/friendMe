@@ -18,6 +18,7 @@ export class FavouritesPetsComponent implements OnInit {
   userId: string = ''
   auth = getAuth();
   filterPetByType = 'all';
+  errorMessage = '';
 
   constructor(private postService: PostService,private authService: AuthService, private alert: AlertService) { }
 
@@ -30,6 +31,12 @@ export class FavouritesPetsComponent implements OnInit {
   getFavouritePetsList() {
    this.authService.favouritesPetsList.subscribe(list => {
      this.favouritesList = list;
+     if(!list.length) {
+       this.errorMessage = "You don't have any favourites pets";
+       this.posts = [];
+     } else {
+       this.errorMessage = '';
+     }
      let favouritePosts = [];
      let countIndex= 0;
      const promises = this.favouritesList.map(id => this.postService.getById(id));

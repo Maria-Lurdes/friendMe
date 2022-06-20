@@ -4,7 +4,11 @@
         ❤️ Your favourites pets here ❤️
     </p>
 
-    <div *ngIf="posts[0]?.avatar; else loading" class="pets-wrapper">
+    <p *ngIf="errorMessage.length" class="title">
+        {{errorMessage}}
+    </p>
+
+    <div *ngIf="posts[0]?.avatar && !errorMessage.length" class="pets-wrapper">
         <app-pet-card
                 *ngFor="let post of posts | filterType:filterPetByType"
                 [petPost]="post"
@@ -13,7 +17,5 @@
         ></app-pet-card>
     </div>
 
-    <ng-template #loading>
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </ng-template>
+    <mat-progress-bar *ngIf="!posts[0]?.avatar && !errorMessage.length" mode="indeterminate"></mat-progress-bar>
 </div>
