@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PetCardComponent } from './pet-card.component';
 import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('PetCardComponent', () => {
   let component: PetCardComponent;
@@ -13,7 +13,7 @@ describe('PetCardComponent', () => {
       declarations: [ PetCardComponent ],
       imports: [
         RouterTestingModule,
-        HttpClientModule
+        HttpClientTestingModule
       ],
     })
     .compileComponents();

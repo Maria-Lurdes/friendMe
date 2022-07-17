@@ -15,7 +15,6 @@ import {AlertService} from "../../shared/services/alert.service";
 export class EditInfoModalComponent implements OnInit {
 
     type: string
-    petId: string
     updatedInfo: FormGroup;
     submitted = false;
     user: UserAuthInfo;

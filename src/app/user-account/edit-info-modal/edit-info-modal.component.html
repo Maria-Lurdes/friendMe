@@ -25,7 +25,7 @@
         <p class="file-name" *ngIf="avatarName">{{avatarName}}</p>
 
         <button
-                [disabled]="updatedInfo.invalid || submitted"
+                [disabled]="updatedInfo?.invalid || submitted"
                 mat-raised-button
                 color="primary"
                 (click)="submit()">

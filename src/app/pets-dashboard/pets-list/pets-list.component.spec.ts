@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PetsListComponent } from './pets-list.component';
-import {HttpClientModule} from "@angular/common/http";
 import {RouterTestingModule} from "@angular/router/testing";
+import {AlertService} from "../../shared/services/alert.service";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('PetsListComponent', () => {
   let component: PetsListComponent;
@@ -12,8 +13,9 @@ describe('PetsListComponent', () => {
       declarations: [ PetsListComponent ],
       imports: [
         RouterTestingModule,
-        HttpClientModule
+        HttpClientTestingModule
       ],
+      providers: [AlertService]
     })
     .compileComponents();
   }));
