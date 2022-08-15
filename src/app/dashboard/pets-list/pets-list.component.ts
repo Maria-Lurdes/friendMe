@@ -20,9 +20,9 @@ export class PetsListComponent implements OnInit {
   auth = getAuth();
   favouritesList: string[] = [];
   pageIndex: number = 0;
-  pageSize: number = 9;
+  pageSize: number = 8;
   lowValue: number = 0;
-  highValue: number = 9;
+  highValue: number = 8;
 
   constructor(
     private postService: PostService,

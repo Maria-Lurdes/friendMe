@@ -28,9 +28,9 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="posts[0]?.avatar; else loading" class="pets-wrapper">
+            <div *ngIf="(posts | filterType:filterPetByType | slice: lowValue : highValue)?.length; else loading" class="pets-wrapper">
                 <app-pet-card
-                        *ngFor="let post of posts | filterType:filterPetByType"
+                        *ngFor="let post of posts | filterType:filterPetByType | slice: lowValue : highValue"
                         [favouritesList]="favouritesList"
                         [petPost]="post"
                         [userId]="userId"
