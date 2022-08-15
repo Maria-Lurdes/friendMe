@@ -1,14 +1,14 @@
-<mat-card class="card" [ngClass]="petPost.color" [style.background-image]="'url('+petPost.avatar+')'">
+<mat-card [ngClass]="petPost.color" [style.background-image]="'url('+petPost.avatar+')'" class="card">
     <mat-card-title>
         <span>{{petPost.name}}
-            <mat-icon *ngIf="isAdmin" (click)="openEditFormModal()">edit</mat-icon></span>
+            <mat-icon (click)="openEditFormModal()" *ngIf="isAdmin">edit</mat-icon></span>
         <div class="icons-block">
-            <div class="goTo heart" (click)="addRemoveToFavoirites()">
-                <img *ngIf="!isFavourite" src="../../../assets/icons/heart-outlined.png" alt="">
-                <img *ngIf="isFavourite" src="../../../assets/icons/heart-filled.png" alt="">
+            <div (click)="addRemoveToFavoirites()" class="goTo heart">
+                <img *ngIf="!isFavourite" alt="" src="../../../assets/icons/heart-outlined.png">
+                <img *ngIf="isFavourite" alt="" src="../../../assets/icons/heart-filled.png">
             </div>
-            <div class="goTo"
-                 [routerLink]="['/pets-dashboard', 'pet-info', petPost.id]">
+            <div [routerLink]="['/pets-dashboard', 'pet-info', petPost.id]"
+                 class="goTo">
                 <mat-icon>keyboard_arrow_right</mat-icon>
             </div>
         </div>

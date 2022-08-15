@@ -1,23 +1,23 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .mat-snack-bar-container.success {
-    background: #e2f5cb;
-    color: #03073b;
+  background: #e2f5cb;
+  color: #03073b;
 }
 
 .mat-snack-bar-container.warning {
-    background: #c2ebff;
-    color: #03073b;
+  background: #c2ebff;
+  color: #03073b;
 }
 
 .mat-snack-bar-container.danger {
-    background: #fde9c2;
-    color: #03073b;
+  background: #fde9c2;
+  color: #03073b;
 }
 
 .mat-simple-snackbar-action {
-    color: black;
+  color: black;
 }

@@ -33,7 +33,7 @@
         .type {
           width: 60px;
           height: 60px;
-          background: #F7F7F8;
+          background: #f7f7f8;
           border-radius: 15.6645px;
           display: flex;
           justify-content: center;
@@ -42,8 +42,11 @@
           cursor: pointer;
 
           &.active {
-            background: linear-gradient(180deg, #64ADEF 0%, #3198F4 100%);
-            box-shadow: 0 9.39868px 22.9745px rgba(0, 0, 0, 0.06), 0 4.86042px 9.5093px rgba(0, 0, 0, 0.0364023), 0 3.41853px 5.70127px rgba(0, 0, 0, 0.0251704), 0 2.18408px 2.93018px rgba(0, 0, 0, 0.0151591);
+            background: linear-gradient(180deg, #64adef 0%, #3198f4 100%);
+            box-shadow: 0 9.39868px 22.9745px rgba(0, 0, 0, 0.06),
+              0 4.86042px 9.5093px rgba(0, 0, 0, 0.0364023),
+              0 3.41853px 5.70127px rgba(0, 0, 0, 0.0251704),
+              0 2.18408px 2.93018px rgba(0, 0, 0, 0.0151591);
 
             p {
               color: white;
@@ -54,7 +57,7 @@
             font-size: 16px;
             line-height: 20px;
             text-align: center;
-            color: #03063A;
+            color: #03063a;
             margin: 0;
           }
         }
@@ -68,12 +71,12 @@
 
         p {
           font-size: 14px;
-          color: #FDD153;
+          color: #fdd153;
           margin: 0 10px 0 20px;
         }
 
         .btn-yellow {
-          background: linear-gradient(180deg, #FDD153 0%, #F5C02D 100%);
+          background: linear-gradient(180deg, #fdd153 0%, #f5c02d 100%);
           border-radius: 4.17719px;
           width: 20px;
           height: 18px;
@@ -81,7 +84,7 @@
       }
 
       .title-categories {
-        color: #03063A;
+        color: #03063a;
         font-size: 18px;
         font-weight: bold;
         margin: 0;
@@ -98,7 +101,6 @@
 
 @media (max-width: 768px) {
   .find-block {
-
     .cat {
       right: 0;
       width: 65%;
@@ -136,5 +138,4 @@
       }
     }
   }
-
 }

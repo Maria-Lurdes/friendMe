@@ -1,26 +1,22 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { FavouritesPetsComponent } from './favourites-pets.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import {AlertService} from "../../shared/services/alert.service";
-import {initializeApp} from "firebase/app";
-import {firebase} from "../../../environments/environment";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { FavouritesPetsComponent } from "./favourites-pets.component";
+import { RouterTestingModule } from "@angular/router/testing";
+import { AlertService } from "../../shared/services/alert.service";
+import { initializeApp } from "firebase/app";
+import { firebase } from "../../../environments/environment";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-describe('FavouritesPetsComponent', () => {
+describe("FavouritesPetsComponent", () => {
   let component: FavouritesPetsComponent;
   let fixture: ComponentFixture<FavouritesPetsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FavouritesPetsComponent ],
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule
-      ],
-      providers: [AlertService]
-    })
-    .compileComponents();
+      declarations: [FavouritesPetsComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      providers: [AlertService],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -30,7 +26,7 @@ describe('FavouritesPetsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

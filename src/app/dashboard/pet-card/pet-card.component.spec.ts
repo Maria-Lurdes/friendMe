@@ -1,22 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PetCardComponent } from './pet-card.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { PetCardComponent } from "./pet-card.component";
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-describe('PetCardComponent', () => {
+describe("PetCardComponent", () => {
   let component: PetCardComponent;
   let fixture: ComponentFixture<PetCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PetCardComponent ],
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule
-      ],
-    })
-    .compileComponents();
+      declarations: [PetCardComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

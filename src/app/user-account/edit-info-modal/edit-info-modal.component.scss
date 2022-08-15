@@ -1,4 +1,4 @@
-.title-wrapper{
+.title-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,12 +10,12 @@
 
 h2 {
   font-size: 26px;
-  color: #03063A;
+  color: #03063a;
 }
 
 h4 {
   font-size: 16px;
-  color: #70717B;
+  color: #70717b;
 }
 
 .form-wrapper {
@@ -34,6 +34,7 @@ h4 {
   input[type="file"] {
     display: none;
   }
+
   .custom-file-upload {
     width: 100%;
     display: flex;
@@ -52,8 +53,7 @@ h4 {
 
   button {
     margin-top: 30px;
-    background: linear-gradient(180deg, #FDD153 0%, #F5C02D 100%);
+    background: linear-gradient(180deg, #fdd153 0%, #f5c02d 100%);
     padding: 8px 0;
   }
-
 }

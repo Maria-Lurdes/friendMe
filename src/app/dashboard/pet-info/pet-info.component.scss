@@ -10,7 +10,7 @@
 
   .pet-wrapper {
     position: relative;
-    background-color: #FFE9C2;
+    background-color: #ffe9c2;
     border-radius: 40px;
     width: 840px;
     height: 850px;
@@ -77,7 +77,7 @@
         .name p {
           font-weight: bold;
           font-size: 26px;
-          color: #03063A;
+          color: #03063a;
         }
 
         .blocks {
@@ -98,15 +98,15 @@
             overflow: hidden;
 
             &.green {
-              background: #E2F5CB;
+              background: #e2f5cb;
             }
 
             &.orange {
-              background: #FFE9C2;
+              background: #ffe9c2;
             }
 
             &.blue {
-              background: #C2EBFF;
+              background: #c2ebff;
             }
 
             .paw-image {
@@ -116,7 +116,7 @@
             }
 
             .bold {
-              color: #03063A;
+              color: #03063a;
               font-size: 17px;
               line-height: 20px;
               margin: 0;
@@ -126,7 +126,7 @@
             }
 
             .small {
-              color: #70717B;
+              color: #70717b;
               font-size: 15px;
               line-height: 17px;
               margin: 0;
@@ -144,7 +144,7 @@
 
         p {
           font-size: 16px;
-          color: #70717B;
+          color: #70717b;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
@@ -163,20 +163,19 @@
           width: 270px;
           height: 57px;
           font-size: 17px;
-          color: #FFFFFF;
+          color: #ffffff;
           font-weight: normal;
         }
 
         .sponsor {
-          background: linear-gradient(180deg, #FDD153 0%, #F5C02D 100%);
+          background: linear-gradient(180deg, #fdd153 0%, #f5c02d 100%);
           margin-right: 100px;
         }
 
         .adopt {
-          background: linear-gradient(180deg, #64ADEF 0%, #3198F4 100%);
+          background: linear-gradient(180deg, #64adef 0%, #3198f4 100%);
         }
       }
-
     }
   }
 }

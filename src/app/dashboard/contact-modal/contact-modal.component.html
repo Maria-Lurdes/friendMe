@@ -1,29 +1,29 @@
 <h2 class="title-wrapper" mat-dialog-title>
     <span>Get in touch </span>
-    <mat-icon matSuffix (click)="closeModal()">close</mat-icon>
+    <mat-icon (click)="closeModal()" matSuffix>close</mat-icon>
 </h2>
 
 <h4>Leave your contacts <br> and we'll get back to you shortly about {{type}}</h4>
 
 <mat-dialog-content class="mat-typography">
-    <form class="form-wrapper" [formGroup]="contactsForm">
+    <form [formGroup]="contactsForm" class="form-wrapper">
 
         <mat-form-field appearance="outline">
             <mat-label>Your Name</mat-label>
-            <input matInput type="text" formControlName="name">
+            <input formControlName="name" matInput type="text">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Your Phone Number</mat-label>
-            <input matInput type="text" formControlName="phone">
+            <input formControlName="phone" matInput type="text">
         </mat-form-field>
 
 
-        <button [ngClass]="type === 'sponsoring' ? 'yellow-btn' : 'blue-btn'"
+        <button (click)="submit()"
                 [disabled]="contactsForm.invalid || submitted"
-                mat-raised-button
+                [ngClass]="type === 'sponsoring' ? 'yellow-btn' : 'blue-btn'"
                 color="primary"
-                (click)="submit()">
+                mat-raised-button>
             <span> Submit </span>
         </button>
 

@@ -1,34 +1,33 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EditInfoModalComponent } from './edit-info-modal.component';
-import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {AlertService} from "../../shared/services/alert.service";
-import {RouterTestingModule} from "@angular/router/testing";
-import {initializeApp} from "firebase/app";
-import {firebase} from "../../../environments/environment";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { EditInfoModalComponent } from "./edit-info-modal.component";
+import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { AlertService } from "../../shared/services/alert.service";
+import { RouterTestingModule } from "@angular/router/testing";
+import { initializeApp } from "firebase/app";
+import { firebase } from "../../../environments/environment";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-describe('EditInfoModalComponent', () => {
+describe("EditInfoModalComponent", () => {
   let component: EditInfoModalComponent;
   let fixture: ComponentFixture<EditInfoModalComponent>;
 
   const mockDialogRef = {
-    close: jasmine.createSpy('close')
+    close: jasmine.createSpy("close"),
   };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditInfoModalComponent ],
+      declarations: [EditInfoModalComponent],
       imports: [MatDialogModule, RouterTestingModule, HttpClientTestingModule],
       providers: [
         {
           provide: MatDialogRef,
-          useValue: mockDialogRef
+          useValue: mockDialogRef,
         },
-          AlertService
-      ]
-    })
-    .compileComponents();
+        AlertService,
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -38,7 +37,7 @@ describe('EditInfoModalComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

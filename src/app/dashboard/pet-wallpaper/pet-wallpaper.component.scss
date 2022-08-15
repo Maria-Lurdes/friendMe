@@ -34,11 +34,11 @@
       font-size: 96px;
       font-weight: bold;
       line-height: 100px;
-      color: #03063A;
+      color: #03063a;
     }
 
     .btn-gradient {
-      background: linear-gradient(180deg, #64ADEF 0%, #3198F4 100%);
+      background: linear-gradient(180deg, #64adef 0%, #3198f4 100%);
       transform: rotate(-0.55deg);
       color: white;
       font-weight: 400;
@@ -52,7 +52,8 @@
       text-align: center;
       align-items: center;
       border-radius: 17px;
-      cursor: url("../../../assets/images/small-paw.png"), url("../../../assets/images/small-paw.png"), auto;
+      cursor: url("../../../assets/images/small-paw.png"),
+        url("../../../assets/images/small-paw.png"), auto;
     }
   }
 

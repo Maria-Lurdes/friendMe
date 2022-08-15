@@ -1,15 +1,15 @@
 <div class="align-wrapper">
-    <mat-card class="pet-wrapper" *ngIf="post?.avatar; else loading">
+    <mat-card *ngIf="post?.avatar; else loading" class="pet-wrapper">
 
-        <img class="paw1" src="../../../assets/images/lapka.png" alt=""/>
-        <img class="paw2" src="../../../assets/images/lapka.png" alt=""/>
+        <img alt="" class="paw1" src="../../../assets/images/lapka.png"/>
+        <img alt="" class="paw2" src="../../../assets/images/lapka.png"/>
 
-        <div class="goTo"
-             [routerLink]="['/pets-dashboard']">
+        <div [routerLink]="['/pets-dashboard']"
+             class="goTo">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </div>
 
-        <img *ngIf="post?.avatar" class="pet-avatar" [src]="post.avatar" alt=""/>
+        <img *ngIf="post?.avatar" [src]="post.avatar" alt="" class="pet-avatar"/>
 
         <div class="description-block">
             <div class="top-container">
@@ -21,19 +21,19 @@
                     <div class="block green">
                         <p class="bold">{{post.sex}}</p>
                         <p class="small">Sex</p>
-                        <img class="paw-image" src="./assets/images/greenPaw.png" alt="">
+                        <img alt="" class="paw-image" src="./assets/images/greenPaw.png">
                     </div>
 
                     <div class="block orange">
                         <p class="bold">{{post.age}} Year</p>
                         <p class="small">Age</p>
-                        <img class="paw-image" src="./assets/images/orangePaw.png" alt="">
+                        <img alt="" class="paw-image" src="./assets/images/orangePaw.png">
                     </div>
 
                     <div class="block blue">
                         <p class="bold">{{post.weight}}kg</p>
                         <p class="small">Weight</p>
-                        <img class="paw-image" src="./assets/images/bluePaw.png" alt="">
+                        <img alt="" class="paw-image" src="./assets/images/bluePaw.png">
                     </div>
                 </div>
             </div>
@@ -43,8 +43,9 @@
             </div>
 
             <div class="btn-block">
-                <button mat-raised-button class="sponsor" (click)="openContactFormModal('sponsoring')">Sponsor Me</button>
-                <button mat-raised-button class="adopt" (click)="openContactFormModal('adopting')">Adopt Me</button>
+                <button (click)="openContactFormModal('sponsoring')" class="sponsor" mat-raised-button>Sponsor Me
+                </button>
+                <button (click)="openContactFormModal('adopting')" class="adopt" mat-raised-button>Adopt Me</button>
             </div>
 
         </div>

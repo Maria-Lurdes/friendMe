@@ -5,22 +5,25 @@
                 <p class="title-categories">
                     Categories
                 </p>
-                <div class="view-all" (click)="filterPetByType='all'">
+                <div (click)="filterPetByType='all'" class="view-all">
                     <p>View All</p>
                     <div class="btn-yellow">
                         <img
-                            src="../../../assets/images/arrow-white.png" alt="">
+                                alt="" src="../../../assets/images/arrow-white.png">
                     </div>
                 </div>
 
                 <div class="pets-types-block">
-                    <div [className]="filterPetByType === 'cat' ? 'active type' : 'type'" (click)="filterPetByType='cat'">
+                    <div (click)="filterPetByType='cat'"
+                         [className]="filterPetByType === 'cat' ? 'active type' : 'type'">
                         <p>Cats</p>
                     </div>
-                    <div [className]="filterPetByType === 'dog' ? 'active type' : 'type'" (click)="filterPetByType='dog'">
+                    <div (click)="filterPetByType='dog'"
+                         [className]="filterPetByType === 'dog' ? 'active type' : 'type'">
                         <p>Dogs</p>
                     </div>
-                    <div [className]="filterPetByType === 'horse' ? 'active type' : 'type'" (click)="filterPetByType='horse'">
+                    <div (click)="filterPetByType='horse'"
+                         [className]="filterPetByType === 'horse' ? 'active type' : 'type'">
                         <p>Horses</p>
                     </div>
                 </div>
@@ -28,9 +31,9 @@
             <div *ngIf="posts[0]?.avatar; else loading" class="pets-wrapper">
                 <app-pet-card
                         *ngFor="let post of posts | filterType:filterPetByType"
+                        [favouritesList]="favouritesList"
                         [petPost]="post"
                         [userId]="userId"
-                        [favouritesList]="favouritesList"
                 ></app-pet-card>
             </div>
 

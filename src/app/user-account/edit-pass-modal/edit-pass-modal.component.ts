@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {AuthService} from "../../shared/services/auth.service";
-import {MatDialogRef} from "@angular/material/dialog";
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import { AuthService } from "../../shared/services/auth.service";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-edit-pass-modal',
-  templateUrl: './edit-pass-modal.component.html',
-  styleUrls: ['./edit-pass-modal.component.scss']
+  selector: "app-edit-pass-modal",
+  templateUrl: "./edit-pass-modal.component.html",
+  styleUrls: ["./edit-pass-modal.component.scss"],
 })
 export class EditPassModalComponent implements OnInit {
-
   forgetPassForm = new FormGroup({
-    email: new FormControl(''),
+    email: new FormControl(""),
   });
 
-  constructor(public auth: AuthService, public dialogRef: MatDialogRef<EditPassModalComponent>) { }
+  constructor(
+    public auth: AuthService,
+    public dialogRef: MatDialogRef<EditPassModalComponent>
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   closeModal() {
     this.dialogRef.close();
@@ -27,5 +28,4 @@ export class EditPassModalComponent implements OnInit {
     await this.auth.sendPasswordResetEmail(this.forgetPassForm.value.email);
     this.closeModal();
   }
-
 }

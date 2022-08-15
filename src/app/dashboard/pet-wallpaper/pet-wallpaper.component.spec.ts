@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PetWallpaperComponent } from './pet-wallpaper.component';
+import { PetWallpaperComponent } from "./pet-wallpaper.component";
 
-describe('PetWallpaperComponent', () => {
+describe("PetWallpaperComponent", () => {
   let component: PetWallpaperComponent;
   let fixture: ComponentFixture<PetWallpaperComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PetWallpaperComponent ]
-    })
-    .compileComponents();
+      declarations: [PetWallpaperComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PetWallpaperComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-@import '../../assets/themes/theme.scss';
+@import "../../assets/themes/theme.scss";
 
 .flex-wrapper-center {
   display: flex;
@@ -66,7 +66,7 @@
     }
 
     .btn-gradient {
-      background: linear-gradient(180deg, #64ADEF 0%, #3198F4 100%);
+      background: linear-gradient(180deg, #64adef 0%, #3198f4 100%);
       transform: rotate(-0.55deg);
       color: white;
       font-weight: 400;
@@ -102,22 +102,22 @@
       margin-top: 10px;
       margin-bottom: 20px;
       text-align: center;
-      color: #70717B;
+      color: #70717b;
     }
   }
 }
 
 @media (max-width: 540px) {
   .flex-wrapper-center {
-
     .example-card {
       justify-content: space-evenly;
-      .title-wrapper, .content-wrapper {
+
+      .title-wrapper,
+      .content-wrapper {
         width: 90%;
         border: none;
         padding: 0;
       }
     }
   }
-
 }

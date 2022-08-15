@@ -1,4 +1,4 @@
-.title-wrapper{
+.title-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,7 +10,7 @@
 
 h2 {
   font-size: 26px;
-  color: #03063A;
+  color: #03063a;
 }
 
 .form-wrapper {
@@ -21,6 +21,7 @@ h2 {
   input[type="file"] {
     display: none;
   }
+
   .custom-file-upload {
     width: 100%;
     display: flex;
@@ -44,9 +45,9 @@ h2 {
   button {
     color: white;
     margin-top: 30px;
-    background: linear-gradient(180deg, #64ADEF 0%, #3198F4 100%);
+    background: linear-gradient(180deg, #64adef 0%, #3198f4 100%);
     padding: 8px 0;
-    cursor: url("../../../assets/images/small-paw.png"), url("../../../assets/images/small-paw.png"), auto;
+    cursor: url("../../../assets/images/small-paw.png"),
+      url("../../../assets/images/small-paw.png"), auto;
   }
-
 }

@@ -1,23 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { PetsListComponent } from './pets-list.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import {AlertService} from "../../shared/services/alert.service";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { PetsListComponent } from "./pets-list.component";
+import { RouterTestingModule } from "@angular/router/testing";
+import { AlertService } from "../../shared/services/alert.service";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
-describe('PetsListComponent', () => {
+describe("PetsListComponent", () => {
   let component: PetsListComponent;
   let fixture: ComponentFixture<PetsListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PetsListComponent ],
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule
-      ],
-      providers: [AlertService]
-    })
-    .compileComponents();
+      declarations: [PetsListComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule],
+      providers: [AlertService],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -26,7 +22,7 @@ describe('PetsListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
