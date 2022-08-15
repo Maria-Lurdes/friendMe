@@ -3,6 +3,7 @@ import { PetsListComponent } from "./pets-list.component";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AlertService } from "../../shared/services/alert.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { FilterPipe } from "../../shared/filter.pipe";
 
 describe("PetsListComponent", () => {
   let component: PetsListComponent;
@@ -10,7 +11,7 @@ describe("PetsListComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PetsListComponent],
+      declarations: [PetsListComponent, FilterPipe],
       imports: [RouterTestingModule, HttpClientTestingModule],
       providers: [AlertService],
     }).compileComponents();

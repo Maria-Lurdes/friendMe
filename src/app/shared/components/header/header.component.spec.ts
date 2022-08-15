@@ -2,8 +2,10 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { HeaderComponent } from "./header.component";
 import { RouterTestingModule } from "@angular/router/testing";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
-import { AlertService } from "../../shared/services/alert.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { AlertService } from "../../services/alert.service";
+import { initializeApp } from "firebase/app";
+import { firebase } from "../../../../environments/environment";
 
 describe("HeaderComponent", () => {
   let component: HeaderComponent;
@@ -27,6 +29,7 @@ describe("HeaderComponent", () => {
   }));
 
   beforeEach(() => {
+    initializeApp(firebase);
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

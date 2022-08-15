@@ -4,6 +4,8 @@ import { SignInComponent } from "./sign-in.component";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AlertService } from "../shared/services/alert.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { initializeApp } from "firebase/app";
+import { firebase } from "../../environments/environment";
 
 describe("SignInComponent", () => {
   let component: SignInComponent;
@@ -18,6 +20,7 @@ describe("SignInComponent", () => {
   }));
 
   beforeEach(() => {
+    initializeApp(firebase);
     fixture = TestBed.createComponent(SignInComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

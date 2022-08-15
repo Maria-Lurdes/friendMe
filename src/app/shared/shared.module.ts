@@ -15,5 +15,6 @@ import { MatIconModule } from "@angular/material/icon";
     MatIconModule,
   ],
   declarations: [FilterPipe],
+  providers: [FilterPipe],
 })
 export class SharedModule {}
