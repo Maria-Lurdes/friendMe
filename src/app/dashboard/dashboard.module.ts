@@ -10,6 +10,7 @@ import { FavouritesPetsComponent } from "./favourites-pets/favourites-pets.compo
 import { DashboardComponent } from "./dashboard.component";
 import { PetWallpaperComponent } from "./pet-wallpaper/pet-wallpaper.component";
 import { PetCardComponent } from "./pet-card/pet-card.component";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PetCardComponent } from "./pet-card/pet-card.component";
     DashboardRoutingModule,
     MatProgressBarModule,
     SharedModule,
+    MatPaginatorModule,
   ],
   providers: [AuthGuard],
 })

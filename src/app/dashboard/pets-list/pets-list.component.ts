@@ -19,6 +19,10 @@ export class PetsListComponent implements OnInit {
   userId: string = "";
   auth = getAuth();
   favouritesList: string[] = [];
+  pageIndex: number = 0;
+  pageSize: number = 9;
+  lowValue: number = 0;
+  highValue: number = 9;
 
   constructor(
     private postService: PostService,
@@ -101,5 +105,16 @@ export class PetsListComponent implements OnInit {
       .catch(() => {
         this.alert.danger("Smth went wrong, try again later");
       });
+  }
+
+  getPaginatorData(event: { pageIndex: number }) {
+    if (event.pageIndex === this.pageIndex + 1) {
+      this.lowValue = this.lowValue + this.pageSize;
+      this.highValue = this.highValue + this.pageSize;
+    } else if (event.pageIndex === this.pageIndex - 1 && this.lowValue > 0) {
+      this.lowValue = this.lowValue - this.pageSize;
+      this.highValue = this.highValue - this.pageSize;
+    }
+    this.pageIndex = event.pageIndex;
   }
 }
