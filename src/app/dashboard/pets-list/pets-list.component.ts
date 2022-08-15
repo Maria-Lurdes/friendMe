@@ -6,6 +6,8 @@ import {AlertService} from "../../shared/services/alert.service";
 import {AuthService} from "../../shared/services/auth.service";
 import {getAuth, onAuthStateChanged} from "firebase/auth";
 
+export type PetSortingType = 'all' | 'cat' | 'dog' | 'horse';
+
 @Component({
     selector: 'app-pets-list',
     templateUrl: './pets-list.component.html',
@@ -17,7 +19,7 @@ export class PetsListComponent implements OnInit {
     }
 
     posts: Post[] = []
-    filterPetByType = 'all'
+    filterPetByType: PetSortingType = 'all'
     userId: string = ''
     auth = getAuth()
     favouritesList: string[] = []
@@ -57,10 +59,6 @@ export class PetsListComponent implements OnInit {
 
     getAllPets() {
         this.postService.getAll();
-    }
-
-    scrollToPetList() {
-        document.getElementById('pets-list').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     getPostsByColor(posts) {

@@ -7,7 +7,7 @@ import {Post} from "../../shared/interfaces";
 import {Subscription} from "rxjs";
 import {getDownloadURL, getStorage, ref} from "firebase/storage";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {ContactModalComponent} from "../../components/contact-modal/contact-modal.component";
+import {ContactModalComponent} from "../contact-modal/contact-modal.component";
 
 @Component({
     selector: 'app-pet-info',
@@ -38,7 +38,6 @@ export class PetInfoComponent implements OnInit {
 
     getImageUrl() {
         let fireStorage = getStorage();
-        console.log(this.post, 'this.post')
         const pathRef = ref(fireStorage, `pets-avatars/${this.post.id}`);
         getDownloadURL(pathRef).then(url => {
             this.post.avatar = url;

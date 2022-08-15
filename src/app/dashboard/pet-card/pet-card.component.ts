@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Post} from "../../shared/interfaces";
-import {PostService} from "../../shared/services/post.service";
-import {AlertService} from "../../shared/services/alert.service";
 import {getStorage, ref, deleteObject} from "firebase/storage";
 import {CreateEditPostModalComponent} from "../create-edit-post-modal/create-edit-post-modal.component";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
+import {PostService} from "../../shared/services/post.service";
 import {AuthService} from "../../shared/services/auth.service";
+import {AlertService} from "../../shared/services/alert.service";
+import {Post} from "../../shared/interfaces";
 
 @Component({
     selector: 'app-pet-card',

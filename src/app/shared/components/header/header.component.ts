@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {CreateEditPostModalComponent} from "../create-edit-post-modal/create-edit-post-modal.component";
+import {CreateEditPostModalComponent} from "../../../dashboard/create-edit-post-modal/create-edit-post-modal.component";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-header',

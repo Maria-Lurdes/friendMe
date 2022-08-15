@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'signin', component: SignInComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
-  { path: 'pets-dashboard', loadChildren: () => import('./pets-dashboard/pets-dashboard.module').then(m => m.PetsDashboardModule)},
+  { path: 'pets-dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
   { path: 'user-account', component: UserAccountComponent },
 ];
 

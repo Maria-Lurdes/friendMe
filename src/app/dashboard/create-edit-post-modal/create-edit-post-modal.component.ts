@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Post} from "../../shared/interfaces";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
+import {getStorage, ref, uploadBytes, deleteObject} from "firebase/storage";
 import {PostService} from "../../shared/services/post.service";
 import {AlertService} from "../../shared/services/alert.service";
-import {getStorage, ref, uploadBytes, deleteObject} from "firebase/storage";
+import {Post} from "../../shared/interfaces";
 
 @Component({
     selector: 'app-create-edit-post-modal',
