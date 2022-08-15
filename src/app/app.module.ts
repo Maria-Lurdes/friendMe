@@ -26,6 +26,7 @@ import { HeaderComponent } from "./shared/components/header/header.component";
 import { CreateEditPostModalComponent } from "./dashboard/create-edit-post-modal/create-edit-post-modal.component";
 import { AlertComponent } from "./shared/components/alert/alert.component";
 import { ContactModalComponent } from "./dashboard/contact-modal/contact-modal.component";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -46,6 +47,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     UserAccountComponent,
     EditInfoModalComponent,
     EditPassModalComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

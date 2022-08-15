@@ -4,6 +4,7 @@ import { SignInComponent } from "./sign-in/sign-in.component";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
 import { UserAccountComponent } from "./user-account/user-account.component";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "signin", pathMatch: "full" },
@@ -16,6 +17,7 @@ const routes: Routes = [
       import("./dashboard/dashboard.module").then((m) => m.DashboardModule),
   },
   { path: "user-account", component: UserAccountComponent },
+  { path: "**", pathMatch: "full", component: PageNotFoundComponent },
 ];
 
 @NgModule({
