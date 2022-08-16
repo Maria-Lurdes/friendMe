@@ -148,6 +148,7 @@ export class AuthService {
   }
 
   private handleAuthError(errorCode: string) {
+    console.log(errorCode, "errorCode");
     switch (errorCode) {
       case "auth/email-already-exists":
         this.alert.danger(
@@ -179,6 +180,9 @@ export class AuthService {
         break;
       case "auth/wrong-password":
         this.alert.danger("Wrong password.");
+        break;
+      case "auth/user-not-found":
+        this.alert.danger("User by this email not found.");
         break;
       default:
         this.alert.danger("Smth went wrong, try again later.");
