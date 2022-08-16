@@ -1,4 +1,4 @@
-import { Component, OnInit, Sanitizer } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { UserAuthInfo } from "../shared/interfaces";
 import { PostService } from "../shared/services/post.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
@@ -20,7 +20,6 @@ export class UserAccountComponent implements OnInit {
   constructor(
     public auth: AuthService,
     public postService: PostService,
-    public sanitizer: Sanitizer,
     public dialog: MatDialog
   ) {}
 

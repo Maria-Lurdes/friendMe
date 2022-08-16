@@ -31,6 +31,7 @@
       align-items: center;
       margin-bottom: 20px;
       margin-top: 20px;
+      flex-wrap: wrap;
 
       img {
         max-width: 200px;
@@ -67,6 +68,32 @@
         font-size: 16.7028px;
         width: 270px;
         height: 58px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .user-wrapper-card {
+    .card {
+      width: 73%;
+
+      .btn-block {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+        .email {
+          margin: 0 0 20px;
+        }
+      }
+
+      .info-block {
+        p {
+          text-align: center;
+          margin-top: 20px;
+        }
       }
     }
   }

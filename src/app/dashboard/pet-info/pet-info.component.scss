@@ -5,7 +5,7 @@
   padding-top: 120px;
 
   .mat-progress-bar {
-    width: 840px;
+    width: 100%;
   }
 
   .pet-wrapper {
@@ -17,6 +17,8 @@
     overflow: hidden;
     padding: 0;
     margin-bottom: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
 
     .paw1 {
       position: absolute;
@@ -174,6 +176,36 @@
 
         .adopt {
           background: linear-gradient(180deg, #64adef 0%, #3198f4 100%);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .align-wrapper {
+    .pet-wrapper {
+      height: 930px;
+      .goTo {
+        z-index: 10;
+      }
+      .description-block {
+        height: 455px;
+        .btn-block {
+          flex-direction: column;
+          flex-wrap: wrap;
+          align-items: center;
+
+          .sponsor {
+            margin: 0 0 10px;
+          }
+        }
+        .top-container {
+          .blocks {
+            .block {
+              width: 90px;
+            }
+          }
         }
       }
     }

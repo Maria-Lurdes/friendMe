@@ -67,3 +67,26 @@
       url("../../assets/images/small-paw.png"), auto;
   }
 }
+
+@media (max-width: 1024px) {
+  .no-page-block {
+    .title {
+      font-size: 30px;
+      line-height: 35px;
+      letter-spacing: 1px;
+    }
+
+    .btn-gradient {
+      font-size: 18px;
+      height: 60px;
+    }
+
+    .paw1 {
+      width: 100px;
+    }
+
+    .paw2 {
+      width: 150px;
+    }
+  }
+}
