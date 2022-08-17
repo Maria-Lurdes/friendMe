@@ -23,6 +23,7 @@ export class PetsListComponent implements OnInit {
   pageSize: number = 8;
   lowValue: number = 0;
   highValue: number = 8;
+  loader: boolean = true;
 
   constructor(
     private postService: PostService,
@@ -59,7 +60,12 @@ export class PetsListComponent implements OnInit {
   getCurrentPosts() {
     this.postService.petPostsArray.subscribe((currentPosts) => {
       this.posts = this.getPostsByColor(currentPosts);
-      if (currentPosts.length) this.getImageUrl();
+
+      if (currentPosts.length) {
+        this.getImageUrl();
+      } else {
+        this.loader = false;
+      }
     });
   }
 
@@ -104,7 +110,8 @@ export class PetsListComponent implements OnInit {
       })
       .catch(() => {
         this.alert.danger("Smth went wrong, try again later");
-      });
+      })
+      .finally(() => (this.loader = false));
   }
 
   getPaginatorData(event: { pageIndex: number }) {

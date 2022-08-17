@@ -33,9 +33,14 @@ export class PostService {
           }));
         })
       )
-      .subscribe((data) => {
-        this.petPostsArray.next(data);
-      });
+      .subscribe(
+        (data) => {
+          this.petPostsArray.next(data);
+        },
+        () => {
+          this.petPostsArray.next([]);
+        }
+      );
   }
 
   getById(id: string): Observable<Post> {

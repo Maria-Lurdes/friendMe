@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="(posts | filterType:filterPetByType | slice: lowValue : highValue)?.length; else loading" class="pets-wrapper">
+            <div *ngIf="!loader; else loading" class="pets-wrapper">
                 <app-pet-card
                         *ngFor="let post of posts | filterType:filterPetByType | slice: lowValue : highValue"
                         [favouritesList]="favouritesList"
@@ -36,6 +36,10 @@
                         [userId]="userId"
                 ></app-pet-card>
             </div>
+
+            <p *ngIf="!loader && !(posts | filterType:filterPetByType | slice: lowValue : highValue)?.length" class="title-categories">
+                There is no pet
+            </p>
 
             <mat-paginator #paginator (page)="getPaginatorData($event)"
                            [length]="(posts | filterType:filterPetByType)?.length"
