@@ -148,7 +148,6 @@ export class AuthService {
   }
 
   private handleAuthError(errorCode: string) {
-    console.log(errorCode, "errorCode");
     switch (errorCode) {
       case "auth/email-already-exists":
         this.alert.danger(

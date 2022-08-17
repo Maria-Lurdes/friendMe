@@ -17,7 +17,7 @@ export class FavouritesPetsComponent implements OnInit {
   userId: string = "";
   auth = getAuth();
   filterPetByType = "all";
-  errorMessage = "";
+  showLoader = true;
 
   constructor(
     private postService: PostService,
@@ -33,13 +33,9 @@ export class FavouritesPetsComponent implements OnInit {
 
   getFavouritePetsList() {
     this.authService.favouritesPetsList.subscribe((list) => {
+      this.showLoader = !!list.length;
       this.favouritesList = list;
-      if (!list.length) {
-        this.errorMessage = "You don't have any favourites pets";
-        this.posts = [];
-      } else {
-        this.errorMessage = "";
-      }
+      this.posts = [];
       let favouritePosts = [];
       let countIndex = 0;
       const promises = this.favouritesList.map((id) =>
@@ -49,27 +45,29 @@ export class FavouritesPetsComponent implements OnInit {
         results.forEach((result) => {
           if (result.status === "fulfilled") {
             result.value.subscribe((val) => {
-              let petPost = { ...val };
-              if (countIndex === 0) {
-                petPost = { ...petPost, color: "green" };
-              } else {
-                if (
-                  favouritePosts[favouritePosts.length - 1].color === "green"
-                ) {
-                  petPost = { ...petPost, color: "orange" };
-                } else if (
-                  favouritePosts[favouritePosts.length - 1].color === "orange"
-                ) {
-                  petPost = { ...petPost, color: "blue" };
-                } else if (
-                  favouritePosts[favouritePosts.length - 1].color === "blue"
-                ) {
+              if (val.name) {
+                let petPost = { ...val };
+                if (countIndex === 0) {
                   petPost = { ...petPost, color: "green" };
+                } else {
+                  if (
+                    favouritePosts[favouritePosts.length - 1].color === "green"
+                  ) {
+                    petPost = { ...petPost, color: "orange" };
+                  } else if (
+                    favouritePosts[favouritePosts.length - 1].color === "orange"
+                  ) {
+                    petPost = { ...petPost, color: "blue" };
+                  } else if (
+                    favouritePosts[favouritePosts.length - 1].color === "blue"
+                  ) {
+                    petPost = { ...petPost, color: "green" };
+                  }
                 }
+                countIndex++;
+                favouritePosts.push(petPost);
+                this.posts = favouritePosts;
               }
-              countIndex++;
-              favouritePosts.push(petPost);
-              this.posts = favouritePosts;
             });
           }
         });
@@ -91,6 +89,7 @@ export class FavouritesPetsComponent implements OnInit {
             if (index >= 0) this.posts[index].avatar = url;
           });
         });
+        this.showLoader = false;
       })
       .catch(() => {
         this.alert.danger("Smth went wrong, try again later");
