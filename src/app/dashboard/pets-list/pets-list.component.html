@@ -5,7 +5,7 @@
                 <p class="title-categories">
                     Categories
                 </p>
-                <div (click)="filterPetByType='all'" class="view-all">
+                <div (click)="handleFilterAndPagination('all')" class="view-all">
                     <p>View All</p>
                     <div class="btn-yellow">
                         <img
@@ -14,15 +14,15 @@
                 </div>
 
                 <div class="pets-types-block">
-                    <div (click)="filterPetByType='cat'"
+                    <div (click)="handleFilterAndPagination('cat')"
                          [className]="filterPetByType === 'cat' ? 'active type' : 'type'">
                         <p>Cats</p>
                     </div>
-                    <div (click)="filterPetByType='dog'"
+                    <div (click)="handleFilterAndPagination('dog')"
                          [className]="filterPetByType === 'dog' ? 'active type' : 'type'">
                         <p>Dogs</p>
                     </div>
-                    <div (click)="filterPetByType='horse'"
+                    <div (click)="handleFilterAndPagination('horse')"
                          [className]="filterPetByType === 'horse' ? 'active type' : 'type'">
                         <p>Horses</p>
                     </div>

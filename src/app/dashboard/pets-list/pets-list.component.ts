@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { PostService } from "../../shared/services/post.service";
 import { Post } from "../../shared/interfaces";
 import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 import { AlertService } from "../../shared/services/alert.service";
 import { AuthService } from "../../shared/services/auth.service";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { MatPaginator } from "@angular/material/paginator";
 
 export type PetSortingType = "all" | "cat" | "dog" | "horse";
 
@@ -14,15 +15,17 @@ export type PetSortingType = "all" | "cat" | "dog" | "horse";
   styleUrls: ["./pets-list.component.scss"],
 })
 export class PetsListComponent implements OnInit {
+  @ViewChild("paginator") paginator: MatPaginator | undefined;
+
   posts: Post[] = [];
   filterPetByType: PetSortingType = "all";
   userId: string = "";
   auth = getAuth();
   favouritesList: string[] = [];
   pageIndex: number = 0;
-  pageSize: number = 8;
+  pageSize: number = 12;
   lowValue: number = 0;
-  highValue: number = 8;
+  highValue: number = 12;
   loader: boolean = true;
 
   constructor(
@@ -123,5 +126,12 @@ export class PetsListComponent implements OnInit {
       this.highValue = this.highValue - this.pageSize;
     }
     this.pageIndex = event.pageIndex;
+  }
+
+  handleFilterAndPagination(type: PetSortingType) {
+    this.lowValue = 0;
+    this.highValue = 9;
+    this.paginator?.firstPage();
+    this.filterPetByType = type;
   }
 }
