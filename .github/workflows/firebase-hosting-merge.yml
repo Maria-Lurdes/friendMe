@@ -13,23 +13,21 @@ jobs:
       matrix:
         node-version: [16.x]
     steps:
-      - uses: actions/checkout@v2
-      - name: actions/setup-node@v3
-      - uses: actions/setup-node@v3
-      - with:
-          node-version: ${{ matrix.node-version}}
+      - uses: actions/checkout@v3
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: install modules
-      - run: npm install
+        run: npm install
       - name: build project
-      - run: npm run build
-      - name: build storybook
-      - run: npm run build:storybook
+        run: ng build
       - name: unit test
-      - run: npm run test:unit
+        run: ng test
       - name: e2e test
-      - run: npm run test:e2e
+        run: ng e2e
       - name: lint code
-      - run: npm run lint
+        run: npm run lint
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
             repoToken: '${{ secrets.GITHUB_TOKEN }}'
