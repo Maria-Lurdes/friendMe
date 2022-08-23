@@ -41,6 +41,7 @@ export class FavouritesPetsComponent implements OnInit {
       const promises = this.favouritesList.map((id) =>
         this.postService.getById(id)
       );
+      // @ts-ignore
       Promise.allSettled(promises).then((results) => {
         results.forEach((result) => {
           if (result.status === "fulfilled") {
