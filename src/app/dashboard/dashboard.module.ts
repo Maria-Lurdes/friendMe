@@ -12,6 +12,8 @@ import { PetWallpaperComponent } from "./pet-wallpaper/pet-wallpaper.component";
 import { PetCardComponent } from "./pet-card/pet-card.component";
 import { MatPaginatorModule } from "@angular/material/paginator";
 
+const modules = [MatPaginatorModule, MatProgressBarModule];
+
 @NgModule({
   declarations: [
     PetsListComponent,
@@ -21,13 +23,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     DashboardComponent,
     PetWallpaperComponent,
   ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    MatProgressBarModule,
-    SharedModule,
-    MatPaginatorModule,
-  ],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, ...modules],
+  exports: [...modules],
   providers: [AuthGuard],
 })
 export class DashboardModule {}

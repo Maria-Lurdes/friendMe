@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, Provider } from "@angular/core";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Provider } from "@angular/core";
 import { initializeApp } from "firebase/app";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -26,13 +26,22 @@ import { HeaderComponent } from "./shared/components/header/header.component";
 import { CreateEditPostModalComponent } from "./dashboard/create-edit-post-modal/create-edit-post-modal.component";
 import { AlertComponent } from "./shared/components/alert/alert.component";
 import { ContactModalComponent } from "./dashboard/contact-modal/contact-modal.component";
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
   multi: true,
   useClass: AuthInterceptor,
 };
+
+const modules = [
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatSnackBarModule,
+  ReactiveFormsModule,
+];
 
 @NgModule({
   declarations: [
@@ -53,20 +62,17 @@ const INTERCEPTOR_PROVIDER: Provider = {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
     SharedModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
       registrationStrategy: "registerWhenStable:30000",
     }),
-    MatSelectModule,
-    MatSnackBarModule,
+    ...modules,
   ],
+  exports: [...modules],
   providers: [INTERCEPTOR_PROVIDER, AlertService],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {
   constructor() {
