@@ -22,10 +22,6 @@ jobs:
         run: npm install
       - name: unit test
         run: npm run test
-      - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-         node-version: 16.x
       - name: build project
         run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
@@ -33,3 +29,4 @@ jobs:
             repoToken: '${{ secrets.GITHUB_TOKEN }}'
             firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
             projectId: friendme-c87e3
+            channelId: 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
