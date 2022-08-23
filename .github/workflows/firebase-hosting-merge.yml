@@ -25,10 +25,14 @@ jobs:
         run: npm run test
       - name: build application
         run: npm run build
+      - name: get token
+        run: firebase login:ci
       - name: run deploy
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
-          projectId: friendme-c87e3
+        env:
+          FIREBASE_TOKEN: $FIREBASE_TOKEN
+#      - uses: FirebaseExtended/action-hosting-deploy@v0
+#        with:
+#          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+#          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
+#          projectId: friendme-c87e3
         run: firebase deploy --only hosting:${{ secrets.FIREBASE_HOSTING_ID }} -P ${{ secrets.FIREBASE_PROJECT_ID }}
