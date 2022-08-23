@@ -6,7 +6,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, MatIconModule],
   exports: [
     HttpClientModule,
     FilterPipe,
