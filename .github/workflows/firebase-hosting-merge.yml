@@ -18,9 +18,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install && npm run test && npm run build
+        run: npm install
+      - name: install firebase tool
+        run: npm install firebase-tools -g
+      - name: run unit tests
+        run: npm run test
+      - name: build application
+        run: npm run build
+      - name: run deploy
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
           projectId: friendme-c87e3
+        run: firebase deploy --only hosting:${{ secrets.FIREBASE_HOSTING_ID }} -P ${{ secrets.FIREBASE_PROJECT_ID }}
