@@ -27,7 +27,7 @@ jobs:
       - name: build application
         run: npm run build
       - name: get token
-        run: firebase login:ci
+        run: firebase login --interactive
       - name: run deploy
         env:
           FIREBASE_TOKEN: $FIREBASE_TOKEN
