@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x]
     steps:
       - uses: actions/checkout@v3
       - name: Staring Node.js ${{ matrix.node-version }}
@@ -23,9 +23,9 @@ jobs:
       - name: build project
         run: npm run build
       - name: unit test
-        run: npm run test:unit
-      - name: e2e test
-        run: npm run test:e2e
+        run: npm run test
+      - name: e2e
+        run: npm run e2e
       - name: lint code
         run: npm run lint
       - uses: FirebaseExtended/action-hosting-deploy@v0
