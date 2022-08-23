@@ -29,3 +29,8 @@ jobs:
         run: npm run test:e2e
       - name: lint code
         run: npm run lint
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+            repoToken: '${{ secrets.GITHUB_TOKEN }}'
+            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
+            projectId: friendme-c87e3
