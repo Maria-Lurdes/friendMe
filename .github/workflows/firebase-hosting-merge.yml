@@ -24,9 +24,11 @@ jobs:
         run: npm run test
       - name: build project
         run: npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-            repoToken: '${{ secrets.GITHUB_TOKEN }}'
-            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
-            projectId: friendme-c87e3
-            channelId: 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
+      - name : deploy to firebase
+        run: firebase deploy
+#      - uses: FirebaseExtended/action-hosting-deploy@v0
+#        with:
+#            repoToken: '${{ secrets.GITHUB_TOKEN }}'
+#            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
+#            projectId: friendme-c87e3
+#            channelId: 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
