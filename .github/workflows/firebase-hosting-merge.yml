@@ -9,26 +9,14 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
     steps:
-      - uses: actions/checkout@v3
-      - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: install modules
-        run: npm install
+      - uses: actions/checkout@v2
       - name: unit test
         run: npm run test
-      - name: build project
-        run: npm run build
-      - name : deploy to firebase
-        run: npm run deploy
-#      - uses: FirebaseExtended/action-hosting-deploy@v0
-#        with:
-#            repoToken: '${{ secrets.GITHUB_TOKEN }}'
-#            firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
-#            projectId: friendme-c87e3
-#            channelId: 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
+      - name: build
+      - run: npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FRIENDME_C87E3 }}'
+          projectId: friendme-c87e3
