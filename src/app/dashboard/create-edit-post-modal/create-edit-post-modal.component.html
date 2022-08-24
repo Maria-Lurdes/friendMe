@@ -51,7 +51,7 @@
         </label>
 
         <p *ngIf="avatarName" class="file-name">{{avatarName}}</p>
-        <button (click)="submit()" [disabled]="petPost.invalid || submitted || !avatarName" class="create"
+        <button (click)="submit()" [disabled]="buttonIsDisabled()" class="create"
                 color="primary" mat-raised-button>
             <ng-container *ngIf="postToEdit; else createPet">Update</ng-container>
             <ng-template #createPet>Create</ng-template>

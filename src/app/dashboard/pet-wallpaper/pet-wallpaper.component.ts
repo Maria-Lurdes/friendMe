@@ -13,6 +13,6 @@ export class PetWallpaperComponent implements OnInit {
   scrollToPetList() {
     document
       .getElementById("pets-list")
-      .scrollIntoView({ behavior: "smooth", block: "center" });
+      .scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }

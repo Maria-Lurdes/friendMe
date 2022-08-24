@@ -34,7 +34,7 @@ export class UserAccountComponent implements OnInit {
 
   getRandomFact() {
     this.postService.getRandomFact().subscribe((quotesList) => {
-      this.randomCatQuote = quotesList[0].text;
+      this.randomCatQuote = quotesList.data[0];
     });
   }
 

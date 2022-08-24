@@ -50,6 +50,10 @@ h2 {
     cursor: url("../../../assets/images/small-paw.png"),
       url("../../../assets/images/small-paw.png"), auto;
   }
+
+  button[disabled] {
+    background: gray;
+  }
 }
 
 @media (max-width: 768px) {

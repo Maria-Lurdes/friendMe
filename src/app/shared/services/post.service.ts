@@ -72,7 +72,7 @@ export class PostService {
     );
   }
 
-  getRandomFact(): Observable<CatQuote[]> {
-    return this.http.get<CatQuote[]>(`https://cat-fact.herokuapp.com/facts`);
+  getRandomFact(): Observable<CatQuote> {
+    return this.http.get<CatQuote>(`https://meowfacts.herokuapp.com/`);
   }
 }

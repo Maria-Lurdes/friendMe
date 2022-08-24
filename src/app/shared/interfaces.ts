@@ -40,7 +40,7 @@ export interface Post {
 }
 
 export interface CatQuote {
-  text: string;
+  data: string[];
 }
 
 export interface ContactForm {

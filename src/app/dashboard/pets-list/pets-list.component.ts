@@ -130,7 +130,7 @@ export class PetsListComponent implements OnInit {
 
   handleFilterAndPagination(type: PetSortingType) {
     this.lowValue = 0;
-    this.highValue = 9;
+    this.highValue = 12;
     this.paginator?.firstPage();
     this.filterPetByType = type;
   }

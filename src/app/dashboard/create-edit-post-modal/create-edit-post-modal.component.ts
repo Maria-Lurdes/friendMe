@@ -129,4 +129,9 @@ export class CreateEditPostModalComponent implements OnInit {
       this.avatarName = e.target.files[0].name;
     }
   }
+
+  buttonIsDisabled(): boolean {
+    const imageIsNotValid = !this.postToEdit && !this.avatarName;
+    return this.petPost.invalid || this.submitted || imageIsNotValid;
+  }
 }

@@ -45,7 +45,11 @@ export class AuthService {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         let userSettings = JSON.parse(localStorage.getItem(user.uid));
-        if (userSettings) this.favouritesPetsList.next(userSettings);
+        if (userSettings) {
+          this.favouritesPetsList.next(userSettings);
+        } else {
+          this.favouritesPetsList.next([]);
+        }
       }
     });
   }
