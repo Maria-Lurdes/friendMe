@@ -4,6 +4,7 @@ import { CatQuote, ContactForm, FbCreateResponse, Post } from "../interfaces";
 import { environment } from "../../../environments/environment";
 import { map } from "rxjs/operators";
 import { Injectable } from "@angular/core";
+import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 
 @Injectable({ providedIn: "root" })
 export class PostService {
@@ -35,12 +36,30 @@ export class PostService {
       )
       .subscribe(
         (data) => {
-          this.petPostsArray.next(data);
+          this.getImageUrl(data);
         },
         () => {
           this.petPostsArray.next([]);
         }
       );
+  }
+
+  getImageUrl(data) {
+    let posts = [...data];
+    let fireStorage = getStorage();
+    const listRef = ref(fireStorage, `pets-avatars`);
+    listAll(listRef).then((res) => {
+      res.items.forEach((itemRef) => {
+        getDownloadURL(itemRef)
+          .then((url) => {
+            let index = posts.findIndex((post) => post.id === itemRef.name);
+            posts[index].avatar = url;
+          })
+          .finally(() => {
+            this.petPostsArray.next(posts);
+          });
+      });
+    });
   }
 
   getById(id: string): Observable<Post> {

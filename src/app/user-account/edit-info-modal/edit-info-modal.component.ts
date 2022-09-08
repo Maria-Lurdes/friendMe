@@ -32,11 +32,10 @@ export class EditInfoModalComponent implements OnInit {
     public dialogRef: MatDialogRef<EditInfoModalComponent>,
     public auth: AuthService,
     private alert: AlertService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     onAuthStateChanged(this.firebasAuth, (user) => {
       if (user) {
+        console.log(user, "user");
         this.user = user;
         this.updatedInfo = new FormGroup({
           email: new FormControl(this.user.email, [
@@ -51,6 +50,8 @@ export class EditInfoModalComponent implements OnInit {
       }
     });
   }
+
+  ngOnInit(): void {}
 
   closeModal() {
     this.dialogRef.close();
@@ -102,7 +103,7 @@ export class EditInfoModalComponent implements OnInit {
 
   async submit() {
     this.submitted = true;
-    if (this.userAvatar[0]) {
+    if (this.userAvatar && this.userAvatar[0]) {
       this.updateUserImage();
     } else {
       await this.saveNewUserInfo();

@@ -15,6 +15,7 @@ import { Router } from "@angular/router";
 import { AlertService } from "./alert.service";
 import { LoginInfo, UserAuthInfo } from "../interfaces";
 import { Subject } from "rxjs";
+import { AuthConstants } from "./auth.constants";
 
 @Injectable({
   providedIn: "root",
@@ -29,7 +30,8 @@ export class AuthService {
   constructor(
     private alert: AlertService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private constants: AuthConstants
   ) {}
 
   get token(): string {
@@ -107,7 +109,7 @@ export class AuthService {
     try {
       await signInWithEmailAndPassword(this.auth, user.email, user.password);
       await this.setTokenAndNavigate();
-      if (this.auth.currentUser.email === "admin@gmail.com") {
+      if (this.auth.currentUser.email === this.constants.ADMIN_EMAIL) {
         localStorage.setItem("role", "admin");
       } else {
         localStorage.setItem("role", "user");
