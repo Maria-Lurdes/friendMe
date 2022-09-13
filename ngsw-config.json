@@ -5,7 +5,7 @@
     "name": "api-performance",
     "urls": [
       "/assets/i18n/**",
-      "/api/**"
+      "/friendme-c87e3-default-rtdb.firebaseio.com/**"
     ],
     "cacheConfig": {
       "strategy": "performance",
@@ -16,7 +16,7 @@
     {
       "name": "api-freshness",
       "urls": [
-        "/api"
+        "/friendme-c87e3-default-rtdb.firebaseio.com/"
       ],
       "cacheConfig": {
         "strategy": "freshness",
