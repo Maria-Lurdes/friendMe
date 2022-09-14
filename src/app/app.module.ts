@@ -64,8 +64,7 @@ const modules = [
     BrowserAnimationsModule,
     SharedModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
-      enabled: true,
-      registrationStrategy: "registerWhenStable:30000",
+      enabled: true
     }),
     ...modules,
   ],
