@@ -11,7 +11,7 @@ import { MatInputModule } from "@angular/material/input";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
-import { environment, firebase } from "../environments/environment";
+import { firebase } from "../environments/environment";
 import { SharedModule } from "./shared/shared.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from "@angular/material/select";
@@ -64,7 +64,7 @@ const modules = [
     BrowserAnimationsModule,
     SharedModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
-      enabled: environment.production,
+      enabled: true,
       registrationStrategy: "registerWhenStable:30000",
     }),
     ...modules,
