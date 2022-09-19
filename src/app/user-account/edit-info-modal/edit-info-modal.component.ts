@@ -35,7 +35,6 @@ export class EditInfoModalComponent implements OnInit {
   ) {
     onAuthStateChanged(this.firebasAuth, (user) => {
       if (user) {
-        console.log(user, "user");
         this.user = user;
         this.updatedInfo = new FormGroup({
           email: new FormControl(this.user.email, [
