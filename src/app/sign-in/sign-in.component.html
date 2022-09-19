@@ -17,6 +17,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
                         <input formControlName="email" matInput type="text">
+                        <mat-error *ngIf="signInForm.get('email').errors">Please fill the field correctly</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
@@ -26,6 +27,7 @@
                                 matSuffix>
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
+                        <mat-error *ngIf="signInForm.get('password').errors">Please fill the field correctly</mat-error>
                     </mat-form-field>
 
                     <a class="blue m-b-10" href="/forget-password">Forget password?</a>

@@ -12,11 +12,13 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Display Name</mat-label>
                         <input formControlName="displayName" matInput type="text">
+                        <mat-error *ngIf="signUpForm.get('displayName').errors">Please fill the field correctly</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
                         <input formControlName="email" matInput type="text">
+                        <mat-error *ngIf="signUpForm.get('email').errors">Please fill the field correctly</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
@@ -25,6 +27,7 @@
                         <button disabled mat-icon-button matSuffix>
                             <mat-icon>'visibility_off'</mat-icon>
                         </button>
+                        <mat-error *ngIf="signUpForm.get('firstPassword').errors">Please fill the field correctly</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
@@ -33,6 +36,7 @@
                         <button disabled mat-icon-button matSuffix>
                             <mat-icon>'visibility_off'</mat-icon>
                         </button>
+                        <mat-error *ngIf="signUpForm.get('secondPassword').errors">Please fill the field correctly</mat-error>
                     </mat-form-field>
 
                     <button (click)="signUp()" [disabled]="signUpForm.invalid || submitted" class="btn-gradient"

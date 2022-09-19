@@ -10,21 +10,25 @@
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
             <input formControlName="name" matInput type="text">
+            <mat-error *ngIf="petPost.get('name').errors">Please fill the field correctly</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
             <textarea formControlName="description" matInput></textarea>
+            <mat-error *ngIf="petPost.get('description').errors">Please fill the field correctly</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Age</mat-label>
             <input formControlName="age" matInput max="100" min="0" type="number">
+            <mat-error *ngIf="petPost.get('age').errors">Please fill the field correctly</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Weight</mat-label>
             <input formControlName="weight" matInput min="0" type="number">
+            <mat-error *ngIf="petPost.get('weight').errors">Please fill the field correctly</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -34,6 +38,7 @@
                 <mat-option value="dog">Dog</mat-option>
                 <mat-option value="horse">Horse</mat-option>
             </mat-select>
+            <mat-error *ngIf="petPost.get('type').errors">Please fill the field correctly</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -42,6 +47,7 @@
                 <mat-option value="male">Male</mat-option>
                 <mat-option value="female">Female</mat-option>
             </mat-select>
+            <mat-error *ngIf="petPost.get('sex').errors">Please fill the field correctly</mat-error>
         </mat-form-field>
 
         <label class="custom-file-upload">
