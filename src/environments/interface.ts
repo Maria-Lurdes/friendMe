@@ -1,8 +1,8 @@
 export interface Environment {
-  apiKey: string;
+  apiKey?: string;
   production: boolean;
-  fvDbUrl: string;
-  fvStUrl: string;
+  fvDbUrl?: string;
+  fvStUrl?: string;
 }
 
 export interface Firebase {

@@ -27,7 +27,7 @@ export class PostService {
     return this.http
       .get(`${environment.fvDbUrl}/posts.json`)
       .pipe(
-        map((response: { [key: string]: any }) => {
+        map((response: { [key: string]: Post }) => {
           return Object.keys(response).map((key) => ({
             ...response[key],
             id: key,
