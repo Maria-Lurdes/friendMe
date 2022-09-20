@@ -9,13 +9,13 @@
         <mat-form-field appearance="outline">
             <mat-label>Your New Display Name</mat-label>
             <input formControlName="displayName" matInput type="text">
-            <mat-error *ngIf="updatedInfo.get('displayName').errors">Please fill the field correctly</mat-error>
+            <mat-error *ngIf="updatedInfo?.get('displayName').errors">Please fill the field correctly</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Your New Email</mat-label>
             <input formControlName="email" matInput type="text">
-            <mat-error *ngIf="updatedInfo.get('email').errors">Please fill the field correctly</mat-error>
+            <mat-error *ngIf="updatedInfo?.get('email').errors">Please fill the field correctly</mat-error>
         </mat-form-field>
 
         <label class="custom-file-upload">
