@@ -7342,7 +7342,7 @@
     "winston-transport" "^4.4.0"
     "ws" "^7.2.3"
 
-"firebase@^9.8.1":
+"firebase@^9.10.0":
   "integrity" "sha512-oSuED6BT+gQrOoXPV/xkxBLMk03A9nDXosW0xy4loQtGRJr9gW6JXgEOr0nmXFMTGzP87CpoC8Kd6y7XKSAeqQ=="
   "resolved" "https://registry.npmjs.org/firebase/-/firebase-9.10.0.tgz"
   "version" "9.10.0"
@@ -16094,12 +16094,7 @@
   "resolved" "https://registry.npmjs.org/ws/-/ws-7.4.6.tgz"
   "version" "7.4.6"
 
-"ws@>=7.4.6":
-  "integrity" "sha512-Ja7nszREasGaYUYCI2k4lCKIRTt+y7XuqVoHR44YpI49TtryyqbqvDMn5eqfW7e6HzTukDRIsXqzVHScqRcafg=="
-  "resolved" "https://registry.npmjs.org/ws/-/ws-8.9.0.tgz"
-  "version" "8.9.0"
-
-"ws@~7.4.2":
+"ws@>=7.4.6", "ws@~7.4.2":
   "integrity" "sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A=="
   "resolved" "https://registry.npmjs.org/ws/-/ws-7.4.6.tgz"
   "version" "7.4.6"
