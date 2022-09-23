@@ -4,6 +4,8 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { AlertService } from "../../shared/services/alert.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { FilterPipe } from "../../shared/filter.pipe";
+import { initializeApp } from "firebase/app";
+import { firebase } from "../../../environments/environment";
 
 describe("PetsListComponent", () => {
   let component: PetsListComponent;
@@ -18,6 +20,7 @@ describe("PetsListComponent", () => {
   }));
 
   beforeEach(() => {
+    initializeApp(firebase);
     fixture = TestBed.createComponent(PetsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
