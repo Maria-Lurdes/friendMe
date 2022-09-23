@@ -10,7 +10,10 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
-import { ServiceWorkerModule } from "@angular/service-worker";
+import {
+  ServiceWorkerModule,
+  SwRegistrationOptions,
+} from "@angular/service-worker";
 import { environment, firebase } from "../environments/environment";
 import { SharedModule } from "./shared/shared.module";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -63,16 +66,21 @@ const modules = [
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    ...modules,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: "registerWhenStable:30000",
     }),
+    ...modules,
   ],
   exports: [...modules],
-  providers: [INTERCEPTOR_PROVIDER, AlertService],
+  providers: [
+    INTERCEPTOR_PROVIDER,
+    AlertService,
+    ServiceWorkerModule,
+    {
+      provide: SwRegistrationOptions,
+      useFactory: () => ({ enabled: environment.production }),
+    },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

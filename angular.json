@@ -29,9 +29,7 @@
               "src/styles.css",
               "src/theme.scss"
             ],
-            "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -60,7 +58,9 @@
                   "maximumWarning": "70kb",
                   "maximumError": "70kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
