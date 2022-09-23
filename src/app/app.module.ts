@@ -10,11 +10,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { ForgetPasswordComponent } from "./forget-password/forget-password.component";
-import {
-  ServiceWorkerModule,
-  SwRegistrationOptions,
-} from "@angular/service-worker";
-import { environment, firebase } from "../environments/environment";
+import { firebase, environment } from "../environments/environment";
 import { SharedModule } from "./shared/shared.module";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatSelectModule } from "@angular/material/select";
@@ -30,6 +26,7 @@ import { CreateEditPostModalComponent } from "./dashboard/create-edit-post-modal
 import { AlertComponent } from "./shared/components/alert/alert.component";
 import { ContactModalComponent } from "./dashboard/contact-modal/contact-modal.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -66,20 +63,18 @@ const modules = [
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    ServiceWorkerModule.register("ngsw-worker.js", {
-      enabled: environment.production,
-    }),
     ...modules,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   exports: [...modules],
   providers: [
     INTERCEPTOR_PROVIDER,
     AlertService,
-    ServiceWorkerModule,
-    {
-      provide: SwRegistrationOptions,
-      useFactory: () => ({ enabled: environment.production }),
-    },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
