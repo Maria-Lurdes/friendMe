@@ -68,6 +68,7 @@ const modules = [
     SharedModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
+      registrationStrategy: "registerWhenStable:30000",
     }),
     ...modules,
   ],
