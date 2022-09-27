@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Provider } from "@angular/core";
 import { initializeApp } from "firebase/app";
+import { enableIndexedDbPersistence, getFirestore } from "firebase/firestore";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -87,6 +88,8 @@ const modules = [
 })
 export class AppModule {
   constructor() {
-    initializeApp(firebase);
+    const app = initializeApp(firebase);
+    const db = getFirestore(app);
+    enableIndexedDbPersistence(db);
   }
 }
