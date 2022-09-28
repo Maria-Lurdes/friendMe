@@ -23,9 +23,7 @@ export class CreateEditPostModalComponent implements OnInit {
     public dialogRef: MatDialogRef<CreateEditPostModalComponent>,
     public postService: PostService,
     private alert: AlertService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.petPost = new FormGroup({
       name: new FormControl(this.postToEdit ? this.postToEdit.name : null, [
         Validators.required,
@@ -48,6 +46,8 @@ export class CreateEditPostModalComponent implements OnInit {
       ]),
     });
   }
+
+  ngOnInit(): void {}
 
   closeModal() {
     this.dialogRef.close();

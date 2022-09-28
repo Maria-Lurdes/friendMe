@@ -6,6 +6,9 @@ import { AlertService } from "../shared/services/alert.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { initializeApp } from "firebase/app";
 import { firebase } from "../../environments/environment";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 describe("SignInComponent", () => {
   let component: SignInComponent;
@@ -13,7 +16,13 @@ describe("SignInComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+      ],
       declarations: [SignInComponent],
       providers: [AlertService],
     }).compileComponents();

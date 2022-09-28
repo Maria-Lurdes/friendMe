@@ -7,6 +7,9 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { initializeApp } from "firebase/app";
 import { firebase } from "../../../environments/environment";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 describe("EditInfoModalComponent", () => {
   let component: EditInfoModalComponent;
@@ -19,7 +22,14 @@ describe("EditInfoModalComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [EditInfoModalComponent],
-      imports: [MatDialogModule, RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        MatDialogModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+      ],
       providers: [
         {
           provide: MatDialogRef,

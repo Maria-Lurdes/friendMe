@@ -6,6 +6,9 @@ import { initializeApp } from "firebase/app";
 import { firebase } from "../../../environments/environment";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MatIconModule } from "@angular/material/icon";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 describe("EditPassModalComponent", () => {
   let component: EditPassModalComponent;
@@ -17,7 +20,14 @@ describe("EditPassModalComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [EditPassModalComponent],
-      imports: [MatDialogModule, RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        MatDialogModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+      ],
       providers: [
         {
           provide: MatDialogRef,

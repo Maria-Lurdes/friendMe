@@ -20,14 +20,14 @@ export class ContactModalComponent implements OnInit {
     public dialogRef: MatDialogRef<ContactModalComponent>,
     public postService: PostService,
     private alert: AlertService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.contactsForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       phone: new FormControl(null, [Validators.required]),
     });
   }
+
+  ngOnInit(): void {}
 
   closeModal() {
     this.dialogRef.close();

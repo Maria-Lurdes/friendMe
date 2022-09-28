@@ -4,6 +4,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { AlertService } from "../../shared/services/alert.service";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 describe("PetInfoComponent", () => {
   let component: PetInfoComponent;
@@ -15,7 +16,12 @@ describe("PetInfoComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PetInfoComponent],
-      imports: [MatDialogModule, RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        MatDialogModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatProgressBarModule,
+      ],
       providers: [
         {
           provide: MatDialogRef,

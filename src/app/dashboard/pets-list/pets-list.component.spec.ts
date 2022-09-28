@@ -6,6 +6,8 @@ import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { FilterPipe } from "../../shared/filter.pipe";
 import { initializeApp } from "firebase/app";
 import { firebase } from "../../../environments/environment";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 describe("PetsListComponent", () => {
   let component: PetsListComponent;
@@ -14,7 +16,12 @@ describe("PetsListComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PetsListComponent, FilterPipe],
-      imports: [RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+      ],
       providers: [AlertService],
     }).compileComponents();
   }));

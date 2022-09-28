@@ -6,6 +6,7 @@ import { AlertService } from "../../shared/services/alert.service";
 import { initializeApp } from "firebase/app";
 import { firebase } from "../../../environments/environment";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 
 describe("FavouritesPetsComponent", () => {
   let component: FavouritesPetsComponent;
@@ -14,7 +15,11 @@ describe("FavouritesPetsComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FavouritesPetsComponent],
-      imports: [RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatProgressBarModule,
+      ],
       providers: [AlertService],
     }).compileComponents();
   }));

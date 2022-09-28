@@ -5,6 +5,9 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog";
 import { AlertService } from "../../shared/services/alert.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 describe("ContactModalComponent", () => {
   let component: ContactModalComponent;
@@ -17,7 +20,14 @@ describe("ContactModalComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ContactModalComponent],
-      imports: [MatDialogModule, RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        MatDialogModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+      ],
       providers: [
         {
           provide: MatDialogRef,

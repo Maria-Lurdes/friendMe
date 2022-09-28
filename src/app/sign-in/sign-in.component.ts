@@ -19,7 +19,15 @@ export class SignInComponent implements OnInit {
     public auth: AuthService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.signInForm = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    });
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
@@ -28,14 +36,6 @@ export class SignInComponent implements OnInit {
       } else if (params["authFailed"]) {
         this.message = "Session ended, login again.";
       }
-    });
-
-    this.signInForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
     });
   }
 

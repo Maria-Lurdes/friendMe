@@ -7,6 +7,10 @@ import { AlertService } from "../../shared/services/alert.service";
 import { initializeApp } from "firebase/app";
 import { firebase } from "../../../environments/environment";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatSelectModule } from "@angular/material/select";
 
 describe("CreateEditPostModalComponent", () => {
   let component: CreateEditPostModalComponent;
@@ -19,7 +23,15 @@ describe("CreateEditPostModalComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [CreateEditPostModalComponent],
-      imports: [MatDialogModule, RouterTestingModule, HttpClientTestingModule],
+      imports: [
+        MatDialogModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MatFormFieldModule,
+        MatInputModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+      ],
       providers: [
         {
           provide: MatDialogRef,

@@ -2,8 +2,6 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "./shared/services/auth.service";
 import { AlertService } from "./shared/services/alert.service";
-import { enableIndexedDbPersistence } from "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
 
 @Component({
   selector: "app-root",
@@ -19,7 +17,6 @@ export class AppComponent {
     private alert: AlertService
   ) {
     this.checkInternetConnection();
-    this.enableCashingPages();
   }
 
   checkInternetConnection() {
@@ -28,9 +25,5 @@ export class AppComponent {
         "Ooops! Looks like you're offline. Please, check your internet connection."
       );
     });
-  }
-
-  enableCashingPages() {
-    enableIndexedDbPersistence(getFirestore());
   }
 }
