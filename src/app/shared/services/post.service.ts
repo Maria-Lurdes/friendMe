@@ -48,18 +48,23 @@ export class PostService {
     let posts = [...data];
     let fireStorage = getStorage();
     const listRef = ref(fireStorage, `pets-avatars`);
-    listAll(listRef).then((res) => {
-      res.items.forEach((itemRef) => {
-        getDownloadURL(itemRef)
-          .then((url) => {
-            let index = posts.findIndex((post) => post.id === itemRef.name);
-            posts[index].avatar = url;
-          })
-          .finally(() => {
-            this.petPostsArray.next(posts);
-          });
-      });
-    });
+    listAll(listRef).then(
+      (res) => {
+        res.items.forEach((itemRef) => {
+          getDownloadURL(itemRef)
+            .then((url) => {
+              let index = posts.findIndex((post) => post.id === itemRef.name);
+              posts[index].avatar = url;
+            })
+            .finally(() => {
+              this.petPostsArray.next(posts);
+            });
+        });
+      },
+      () => {
+        this.petPostsArray.next(posts);
+      }
+    );
   }
 
   getById(id: string): Observable<Post> {
