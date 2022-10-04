@@ -58,3 +58,5 @@ env-config.js
 /public/assets
 
 cypress/**
+
+/.angular/cache
