@@ -90,14 +90,6 @@ export class AppModule {
   constructor() {
     const app = initializeApp(firebase);
     const db = getFirestore(app);
-    enableIndexedDbPersistence(db)
-      .then(() => console.log("enableIndexedDbPersistence"))
-      .catch((err) => {
-        if (err.code == "failed-precondition") {
-          console.log("failed-precondition");
-        } else if (err.code == "unimplemented") {
-          console.log("unimplemented");
-        }
-      });
+    enableIndexedDbPersistence(db);
   }
 }

@@ -59,7 +59,7 @@ export class PetsListComponent implements OnInit {
   }
 
   getCurrentPosts() {
-    this.postService.petPostsArray.subscribe(
+    this.postService.petPostsArray$.subscribe(
       (currentPosts) => {
         this.loader = false;
         this.posts = this.getPostsByColor(currentPosts);

@@ -4,7 +4,6 @@ import { PostService } from "../../shared/services/post.service";
 import { ActivatedRoute, Params } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { Post } from "../../shared/interfaces";
-import { Subscription } from "rxjs";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import {
   MatDialog,
@@ -20,7 +19,6 @@ import { ContactModalComponent } from "../contact-modal/contact-modal.component"
 })
 export class PetInfoComponent implements OnInit {
   post: Post;
-  uSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,11 +56,5 @@ export class PetInfoComponent implements OnInit {
     );
     dialogRef.componentInstance.petId = this.post.id;
     dialogRef.componentInstance.type = type;
-  }
-
-  ngOnDestroy() {
-    if (this.uSub) {
-      this.uSub.unsubscribe();
-    }
   }
 }

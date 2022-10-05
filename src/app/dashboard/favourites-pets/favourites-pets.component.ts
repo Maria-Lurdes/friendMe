@@ -52,7 +52,7 @@ export class FavouritesPetsComponent implements OnInit {
   }
 
   getFavouritesPosts() {
-    this.postService.petPostsArray.subscribe(
+    this.postService.petPostsArray$.subscribe(
       (currentPosts) => {
         this.allPetsPosts = currentPosts;
         this.findFavouritesInfo();

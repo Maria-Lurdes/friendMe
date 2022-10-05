@@ -8,7 +8,7 @@ import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 
 @Injectable({ providedIn: "root" })
 export class PostService {
-  public petPostsArray = new Subject<Post[]>();
+  public petPostsArray$ = new Subject<Post[]>();
 
   constructor(private http: HttpClient) {}
 
@@ -39,7 +39,7 @@ export class PostService {
           this.getImageUrl(data);
         },
         () => {
-          this.petPostsArray.next([]);
+          this.petPostsArray$.next([]);
         }
       );
   }
@@ -57,12 +57,12 @@ export class PostService {
               posts[index].avatar = url;
             })
             .finally(() => {
-              this.petPostsArray.next(posts);
+              this.petPostsArray$.next(posts);
             });
         });
       },
       () => {
-        this.petPostsArray.next(posts);
+        this.petPostsArray$.next(posts);
       }
     );
   }
