@@ -59,13 +59,9 @@ export class EditInfoModalComponent implements OnInit {
   updateUserImage() {
     const imageRef = ref(this.fireStorage, `users-avatars/${this.user.uid}`);
     if (this.user.photoURL && !this.user.photoURL.includes("facebook")) {
-      deleteObject(imageRef)
-        .then(() => {
-          this.uploadImageToStorage();
-        })
-        .finally(() => {
-          this.submitted = false;
-        });
+      deleteObject(imageRef).finally(() => {
+        this.uploadImageToStorage();
+      });
     } else {
       this.uploadImageToStorage();
     }
