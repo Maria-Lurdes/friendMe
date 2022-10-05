@@ -63,9 +63,8 @@ export class EditInfoModalComponent implements OnInit {
         .then(() => {
           this.uploadImageToStorage();
         })
-        .catch(() => {
+        .finally(() => {
           this.submitted = false;
-          this.alert.danger("Smth went wrong, try again later");
         });
     } else {
       this.uploadImageToStorage();
