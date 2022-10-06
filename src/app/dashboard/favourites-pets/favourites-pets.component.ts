@@ -1,15 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Post } from "../../shared/interfaces";
 import { PostService } from "../../shared/services/post.service";
 import { AuthService } from "../../shared/services/auth.service";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-favourites-pets",
   templateUrl: "./favourites-pets.component.html",
   styleUrls: ["./favourites-pets.component.scss"],
 })
-export class FavouritesPetsComponent implements OnInit {
+export class FavouritesPetsComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   allPetsPosts: Post[] = [];
   favouritesList: string[] = [];
@@ -17,6 +18,8 @@ export class FavouritesPetsComponent implements OnInit {
   auth = getAuth();
   filterPetByType = "all";
   showLoader = true;
+  favouritesPetsList$: Subscription;
+  petPostsArray$: Subscription;
 
   constructor(
     private postService: PostService,
@@ -31,19 +34,21 @@ export class FavouritesPetsComponent implements OnInit {
     this.getUserId();
   }
 
-  getAllPets() {
+  getAllPets(): void {
     this.postService.getAll();
   }
 
-  getFavouritePetsList() {
-    this.authService.favouritesPetsList.subscribe((list) => {
-      this.showLoader = !!list.length;
-      this.favouritesList = list;
-      this.findFavouritesInfo();
-    });
+  getFavouritePetsList(): void {
+    this.favouritesPetsList$ = this.authService.favouritesPetsList$.subscribe(
+      (list) => {
+        this.showLoader = !!list.length;
+        this.favouritesList = list;
+        this.findFavouritesInfo();
+      }
+    );
   }
 
-  findFavouritesInfo() {
+  findFavouritesInfo(): void {
     let filteredPosts = this.allPetsPosts.filter((post) =>
       this.favouritesList.includes(post.id)
     );
@@ -51,8 +56,8 @@ export class FavouritesPetsComponent implements OnInit {
     this.showLoader = false;
   }
 
-  getFavouritesPosts() {
-    this.postService.petPostsArray$.subscribe(
+  getFavouritesPosts(): void {
+    this.petPostsArray$ = this.postService.petPostsArray$.subscribe(
       (currentPosts) => {
         this.allPetsPosts = currentPosts;
         this.findFavouritesInfo();
@@ -63,7 +68,7 @@ export class FavouritesPetsComponent implements OnInit {
     );
   }
 
-  getPostsByColor(posts) {
+  getPostsByColor(posts): Post[] {
     let updatedPosts = [];
     posts.forEach((item, index) => {
       let postItem = { ...item };
@@ -84,15 +89,20 @@ export class FavouritesPetsComponent implements OnInit {
     return updatedPosts;
   }
 
-  getChosenPets() {
+  getChosenPets(): void {
     this.authService.getFavourites();
   }
 
-  getUserId() {
+  getUserId(): void {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.userId = user.uid;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.petPostsArray$.unsubscribe();
+    this.favouritesPetsList$.unsubscribe();
   }
 }

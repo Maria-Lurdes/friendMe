@@ -25,7 +25,7 @@ export class AuthService {
   facebookProvider = new FacebookAuthProvider();
   auth = getAuth();
 
-  public favouritesPetsList = new Subject<string[]>();
+  public favouritesPetsList$ = new Subject<string[]>();
 
   constructor(
     private alert: AlertService,
@@ -48,9 +48,9 @@ export class AuthService {
       if (user) {
         let userSettings = JSON.parse(localStorage.getItem(user.uid));
         if (userSettings) {
-          this.favouritesPetsList.next(userSettings);
+          this.favouritesPetsList$.next(userSettings);
         } else {
-          this.favouritesPetsList.next([]);
+          this.favouritesPetsList$.next([]);
         }
       }
     });

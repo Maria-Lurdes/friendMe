@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { PostService } from "../../shared/services/post.service";
 import { Post } from "../../shared/interfaces";
 
 import { AuthService } from "../../shared/services/auth.service";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { MatPaginator } from "@angular/material/paginator";
+import { Subscription } from "rxjs";
 
 export type PetSortingType = "all" | "cat" | "dog" | "horse";
 
@@ -13,7 +14,7 @@ export type PetSortingType = "all" | "cat" | "dog" | "horse";
   templateUrl: "./pets-list.component.html",
   styleUrls: ["./pets-list.component.scss"],
 })
-export class PetsListComponent implements OnInit {
+export class PetsListComponent implements OnInit, OnDestroy {
   @ViewChild("paginator") paginator: MatPaginator | undefined;
 
   posts: Post[] = [];
@@ -26,6 +27,8 @@ export class PetsListComponent implements OnInit {
   lowValue: number = 0;
   highValue: number = 12;
   loader: boolean = true;
+  petPostsArray$: Subscription;
+  favouritesPetsList$: Subscription;
 
   constructor(
     private postService: PostService,
@@ -40,13 +43,15 @@ export class PetsListComponent implements OnInit {
     this.getFavouritePetsList();
   }
 
-  getFavouritePetsList() {
-    this.authService.favouritesPetsList.subscribe((list) => {
-      this.favouritesList = list;
-    });
+  getFavouritePetsList(): void {
+    this.favouritesPetsList$ = this.authService.favouritesPetsList$.subscribe(
+      (list) => {
+        this.favouritesList = list;
+      }
+    );
   }
 
-  getUserId() {
+  getUserId(): void {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.userId = user.uid;
@@ -54,12 +59,12 @@ export class PetsListComponent implements OnInit {
     });
   }
 
-  getChosenPets() {
+  getChosenPets(): void {
     this.authService.getFavourites();
   }
 
-  getCurrentPosts() {
-    this.postService.petPostsArray$.subscribe(
+  getCurrentPosts(): void {
+    this.petPostsArray$ = this.postService.petPostsArray$.subscribe(
       (currentPosts) => {
         this.loader = false;
         this.posts = this.getPostsByColor(currentPosts);
@@ -70,11 +75,11 @@ export class PetsListComponent implements OnInit {
     );
   }
 
-  getAllPets() {
+  getAllPets(): void {
     this.postService.getAll();
   }
 
-  getPostsByColor(posts) {
+  getPostsByColor(posts): Post[] {
     let updatedPosts = [];
     posts.forEach((item, index) => {
       let postItem = { ...item };
@@ -95,7 +100,7 @@ export class PetsListComponent implements OnInit {
     return updatedPosts;
   }
 
-  getPaginatorData(event: { pageIndex: number }) {
+  getPaginatorData(event: { pageIndex: number }): void {
     if (event.pageIndex === this.pageIndex + 1) {
       this.lowValue = this.lowValue + this.pageSize;
       this.highValue = this.highValue + this.pageSize;
@@ -106,10 +111,17 @@ export class PetsListComponent implements OnInit {
     this.pageIndex = event.pageIndex;
   }
 
-  handleFilterAndPagination(type: PetSortingType) {
+  handleFilterAndPagination(type: PetSortingType): void {
     this.lowValue = 0;
     this.highValue = 12;
     this.paginator?.firstPage();
     this.filterPetByType = type;
+  }
+
+  ngOnDestroy(): void {
+    // this.postService.petPostsArray$.unsubscribe();
+    this.petPostsArray$.unsubscribe();
+    this.favouritesPetsList$.unsubscribe();
+    // this.authService.favouritesPetsList$.unsubscribe();
   }
 }
