@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AlertService } from "../../shared/services/alert.service";
 import { PostService } from "../../shared/services/post.service";
 import { ActivatedRoute, Params } from "@angular/router";
@@ -11,23 +11,41 @@ import {
   MatDialogRef,
 } from "@angular/material/dialog";
 import { ContactModalComponent } from "../contact-modal/contact-modal.component";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-pet-info",
   templateUrl: "./pet-info.component.html",
   styleUrls: ["./pet-info.component.scss"],
 })
-export class PetInfoComponent implements OnInit {
+export class PetInfoComponent implements OnInit, OnDestroy {
   post: Post;
+  offlineMode$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private alert: AlertService,
     private postsService: PostService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private postService: PostService
   ) {}
 
   ngOnInit() {
+    this.getPetById();
+    this.handleOfflineMode();
+  }
+
+  handleOfflineMode(): void {
+    this.offlineMode$ = this.postService.offlineMode$.subscribe(
+      (offlineMode: boolean) => {
+        if (offlineMode && !this.post.name) {
+          this.getPetById();
+        }
+      }
+    );
+  }
+
+  getPetById(): void {
     this.route.params
       .pipe(
         switchMap((params: Params) => {
@@ -53,11 +71,11 @@ export class PetInfoComponent implements OnInit {
       );
   }
 
-  getImageUrl() {
+  getImageUrl(): void {
     let fireStorage = getStorage();
     const pathRef = ref(fireStorage, `pets-avatars/${this.post.id}`);
     getDownloadURL(pathRef).then(
-      (url) => {
+      (url: string) => {
         this.post.avatar = url;
       },
       () => {
@@ -66,7 +84,7 @@ export class PetInfoComponent implements OnInit {
     );
   }
 
-  openContactFormModal(type) {
+  openContactFormModal(type: string): void {
     let config = new MatDialogConfig();
     let dialogRef: MatDialogRef<ContactModalComponent> = this.dialog.open(
       ContactModalComponent,
@@ -74,5 +92,9 @@ export class PetInfoComponent implements OnInit {
     );
     dialogRef.componentInstance.petId = this.post.id;
     dialogRef.componentInstance.type = type;
+  }
+
+  ngOnDestroy(): void {
+    this.offlineMode$.unsubscribe();
   }
 }

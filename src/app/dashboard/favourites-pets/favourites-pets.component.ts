@@ -20,6 +20,7 @@ export class FavouritesPetsComponent implements OnInit, OnDestroy {
   showLoader = true;
   favouritesPetsList$: Subscription;
   petPostsArray$: Subscription;
+  offlineMode$: Subscription;
 
   constructor(
     private postService: PostService,
@@ -27,11 +28,23 @@ export class FavouritesPetsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.handleOfflineMode();
     this.getAllPets();
     this.getFavouritesPosts();
     this.getChosenPets();
     this.getFavouritePetsList();
     this.getUserId();
+  }
+
+  handleOfflineMode(): void {
+    this.offlineMode$ = this.postService.offlineMode$.subscribe(
+      (offlineMode: boolean) => {
+        if (offlineMode && !this.allPetsPosts.length) {
+          this.getChosenPets();
+          this.getAllPets();
+        }
+      }
+    );
   }
 
   getAllPets(): void {
@@ -40,7 +53,7 @@ export class FavouritesPetsComponent implements OnInit, OnDestroy {
 
   getFavouritePetsList(): void {
     this.favouritesPetsList$ = this.authService.favouritesPetsList$.subscribe(
-      (list) => {
+      (list: string[]) => {
         this.showLoader = !!list.length;
         this.favouritesList = list;
         this.findFavouritesInfo();
@@ -49,7 +62,7 @@ export class FavouritesPetsComponent implements OnInit, OnDestroy {
   }
 
   findFavouritesInfo(): void {
-    let filteredPosts = this.allPetsPosts.filter((post) =>
+    let filteredPosts = this.allPetsPosts.filter((post: Post) =>
       this.favouritesList.includes(post.id)
     );
     this.posts = this.getPostsByColor(filteredPosts);
@@ -58,7 +71,7 @@ export class FavouritesPetsComponent implements OnInit, OnDestroy {
 
   getFavouritesPosts(): void {
     this.petPostsArray$ = this.postService.petPostsArray$.subscribe(
-      (currentPosts) => {
+      (currentPosts: Post[]) => {
         this.allPetsPosts = currentPosts;
         this.findFavouritesInfo();
       },
@@ -70,7 +83,7 @@ export class FavouritesPetsComponent implements OnInit, OnDestroy {
 
   getPostsByColor(posts): Post[] {
     let updatedPosts = [];
-    posts.forEach((item, index) => {
+    posts.forEach((item: Post, index: number) => {
       let postItem = { ...item };
       if (index === 0) {
         postItem = { ...postItem, color: "green" };
@@ -104,5 +117,6 @@ export class FavouritesPetsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.petPostsArray$.unsubscribe();
     this.favouritesPetsList$.unsubscribe();
+    this.offlineMode$.unsubscribe();
   }
 }

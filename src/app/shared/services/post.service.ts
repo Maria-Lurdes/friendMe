@@ -9,8 +9,13 @@ import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 @Injectable({ providedIn: "root" })
 export class PostService {
   public petPostsArray$ = new Subject<Post[]>();
+  public offlineMode$ = new Subject<boolean>();
 
   constructor(private http: HttpClient) {}
+
+  handleChangeOfflineMode(mode: boolean): void {
+    this.offlineMode$.next(mode);
+  }
 
   createPost(post: Post): Observable<Post> {
     return this.http.post(`${environment.fvDbUrl}/posts.json`, post).pipe(

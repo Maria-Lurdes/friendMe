@@ -6,6 +6,8 @@ import { AuthService } from "../../shared/services/auth.service";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { MatPaginator } from "@angular/material/paginator";
 import { Subscription } from "rxjs";
+import firebase from "firebase/compat";
+import User = firebase.User;
 
 export type PetSortingType = "all" | "cat" | "dog" | "horse";
 
@@ -29,6 +31,7 @@ export class PetsListComponent implements OnInit, OnDestroy {
   loader: boolean = true;
   petPostsArray$: Subscription;
   favouritesPetsList$: Subscription;
+  offlineMode$: Subscription;
 
   constructor(
     private postService: PostService,
@@ -36,6 +39,7 @@ export class PetsListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.handleOfflineMode();
     this.getChosenPets();
     this.getAllPets();
     this.getCurrentPosts();
@@ -43,16 +47,27 @@ export class PetsListComponent implements OnInit, OnDestroy {
     this.getFavouritePetsList();
   }
 
+  handleOfflineMode(): void {
+    this.offlineMode$ = this.postService.offlineMode$.subscribe(
+      (offlineMode: boolean) => {
+        if (offlineMode && !this.posts.length) {
+          this.getChosenPets();
+          this.getAllPets();
+        }
+      }
+    );
+  }
+
   getFavouritePetsList(): void {
     this.favouritesPetsList$ = this.authService.favouritesPetsList$.subscribe(
-      (list) => {
+      (list: string[]) => {
         this.favouritesList = list;
       }
     );
   }
 
   getUserId(): void {
-    onAuthStateChanged(this.auth, (user) => {
+    onAuthStateChanged(this.auth, (user: User) => {
       if (user) {
         this.userId = user.uid;
       }
@@ -65,7 +80,7 @@ export class PetsListComponent implements OnInit, OnDestroy {
 
   getCurrentPosts(): void {
     this.petPostsArray$ = this.postService.petPostsArray$.subscribe(
-      (currentPosts) => {
+      (currentPosts: Post[]) => {
         this.loader = false;
         this.posts = this.getPostsByColor(currentPosts);
       },
@@ -81,7 +96,7 @@ export class PetsListComponent implements OnInit, OnDestroy {
 
   getPostsByColor(posts): Post[] {
     let updatedPosts = [];
-    posts.forEach((item, index) => {
+    posts.forEach((item: Post, index: number) => {
       let postItem = { ...item };
       if (index === 0) {
         postItem = { ...postItem, color: "green" };
@@ -121,5 +136,6 @@ export class PetsListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.petPostsArray$.unsubscribe();
     this.favouritesPetsList$.unsubscribe();
+    this.offlineMode$.unsubscribe();
   }
 }

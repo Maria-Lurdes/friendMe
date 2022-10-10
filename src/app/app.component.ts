@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "./shared/services/auth.service";
 import { AlertService } from "./shared/services/alert.service";
+import { PostService } from "./shared/services/post.service";
 
 @Component({
   selector: "app-root",
@@ -14,21 +15,23 @@ export class AppComponent {
   constructor(
     private router: Router,
     public auth: AuthService,
-    private alert: AlertService
+    private alert: AlertService,
+    private postService: PostService
   ) {
     this.checkInternetConnection();
   }
 
   checkInternetConnection(): void {
     window.addEventListener("offline", () => {
+      this.postService.handleChangeOfflineMode(true);
       this.alert.danger(
         "Ooops! Looks like you're offline. Please, check your internet connection."
       );
     });
 
     window.addEventListener("online", () => {
-      // chnage subject online
-      this.alert.success("Your connection is restored");
+      this.postService.handleChangeOfflineMode(false);
+      this.alert.success("Your connection is restored.");
     });
   }
 }
