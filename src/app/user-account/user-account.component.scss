@@ -90,6 +90,11 @@
       }
 
       .info-block {
+        div {
+          height: 80px;
+          max-width: 98%;
+          overflow-y: hidden;
+        }
         p {
           text-align: center;
           margin-top: 20px;
