@@ -30,7 +30,7 @@ export class PetInfoComponent implements OnInit, OnDestroy {
     private postService: PostService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getPetById();
     this.handleOfflineMode();
   }

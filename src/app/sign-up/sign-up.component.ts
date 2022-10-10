@@ -30,7 +30,7 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  signUp() {
+  signUp(): void {
     if (this.signUpForm.invalid) return;
     this.auth.signUpUser(
       this.signUpForm.value.email,

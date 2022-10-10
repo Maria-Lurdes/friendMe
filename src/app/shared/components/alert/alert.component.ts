@@ -16,7 +16,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.aSub = this.alertService.alert$.subscribe((alert) => {
       this._snackBar.open(alert.text, "", {
         duration: 2000,
@@ -27,7 +27,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.aSub) {
       this.aSub.unsubscribe();
     }

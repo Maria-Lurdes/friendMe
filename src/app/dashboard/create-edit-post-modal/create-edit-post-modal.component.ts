@@ -49,11 +49,11 @@ export class CreateEditPostModalComponent implements OnInit {
     });
   }
 
-  closeModal() {
+  closeModal(): void {
     this.dialogRef.close();
   }
 
-  submit() {
+  submit(): void {
     this.submitted = true;
     const post: Post = {
       name: this.petPost.value.name,
@@ -82,7 +82,7 @@ export class CreateEditPostModalComponent implements OnInit {
     }
   }
 
-  uploadImageToStorage(id) {
+  uploadImageToStorage(id): void {
     const file = this.petAvatar.item(0);
     let url = ref(this.fireStorage, `pets-avatars/${id}`);
     const metadata = {
@@ -97,7 +97,7 @@ export class CreateEditPostModalComponent implements OnInit {
     );
   }
 
-  completeRequest() {
+  completeRequest(): void {
     this.submitted = false;
     this.petPost.reset();
     this.closeModal();
@@ -105,7 +105,7 @@ export class CreateEditPostModalComponent implements OnInit {
     this.alert.success("Changes are successfully saved!");
   }
 
-  updatePostImage() {
+  updatePostImage(): void {
     const imageRef = ref(
       this.fireStorage,
       `pets-avatars/${this.postToEdit.id}`

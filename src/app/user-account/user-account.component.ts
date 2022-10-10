@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UserAuthInfo } from "../shared/interfaces";
+import { CatQuote, UserAuthInfo } from "../shared/interfaces";
 import { PostService } from "../shared/services/post.service";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { EditInfoModalComponent } from "./edit-info-modal/edit-info-modal.component";
@@ -32,18 +32,18 @@ export class UserAccountComponent implements OnInit {
     });
   }
 
-  getRandomFact() {
-    this.postService.getRandomFact().subscribe((quotesList) => {
+  getRandomFact(): void {
+    this.postService.getRandomFact().subscribe((quotesList: CatQuote) => {
       this.randomCatQuote = quotesList.data[0];
     });
   }
 
-  editInfo() {
+  editInfo(): void {
     let config = new MatDialogConfig();
     this.dialog.open(EditInfoModalComponent, config);
   }
 
-  changePassword() {
+  changePassword(): void {
     let config = new MatDialogConfig();
     this.dialog.open(EditPassModalComponent, config);
   }

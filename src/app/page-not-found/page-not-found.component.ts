@@ -11,7 +11,7 @@ export class PageNotFoundComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  goToPetList() {
+  goToPetList(): void {
     this.router.navigate(["/pets-dashboard"]);
   }
 }

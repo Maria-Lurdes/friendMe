@@ -22,7 +22,7 @@ export class EditPassModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  closeModal() {
+  closeModal(): void {
     this.dialogRef.close();
   }
 

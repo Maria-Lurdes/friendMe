@@ -28,8 +28,8 @@ export class PetCardComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public postService: PostService,
-    public authService: AuthService,
+    private postService: PostService,
+    private authService: AuthService,
     private alert: AlertService
   ) {}
 
@@ -38,14 +38,14 @@ export class PetCardComponent implements OnInit {
     this.getChosenPosts();
   }
 
-  getChosenPosts() {
+  getChosenPosts(): void {
     this.isFavourite = !!(
       this.favouritesList.length &&
-      this.favouritesList.find((id) => id === this.petPost.id)
+      this.favouritesList.find((id: string) => id === this.petPost.id)
     );
   }
 
-  removePost() {
+  removePost(): void {
     this.postService.remove(this.petPost.id).subscribe(() => {
       let fireStorage = getStorage();
       const imageRef = ref(fireStorage, `pets-avatars/${this.petPost.id}`);
@@ -60,18 +60,18 @@ export class PetCardComponent implements OnInit {
     });
   }
 
-  openEditFormModal() {
+  openEditFormModal(): void {
     let config = new MatDialogConfig();
     let dialogRef: MatDialogRef<CreateEditPostModalComponent> =
       this.dialog.open(CreateEditPostModalComponent, config);
     dialogRef.componentInstance.postToEdit = this.petPost;
   }
 
-  addRemoveToFavoirites() {
+  addRemoveToFavoirites(): void {
     if (this.isFavourite) {
       this.isFavourite = false;
       let updatedArray = this.favouritesList.filter(
-        (id) => id !== this.petPost.id
+        (id: string) => id !== this.petPost.id
       );
       this.updateLocalStorage(updatedArray);
     } else {
@@ -82,7 +82,7 @@ export class PetCardComponent implements OnInit {
     }
   }
 
-  updateLocalStorage(list) {
+  updateLocalStorage(list): void {
     localStorage.removeItem(this.userId);
     localStorage.setItem(this.userId, JSON.stringify(list));
     this.authService.getFavourites();

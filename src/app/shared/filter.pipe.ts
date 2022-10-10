@@ -17,7 +17,7 @@ export class FilterPipe implements PipeTransform {
     return this.getPostsByColor(filteredPosts);
   }
 
-  getPostsByColor(posts) {
+  getPostsByColor(posts): Post[] {
     let updatedPosts = [];
     posts.forEach((item, index) => {
       let post = item;

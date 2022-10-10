@@ -48,11 +48,11 @@ export class EditInfoModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  closeModal() {
+  closeModal(): void {
     this.dialogRef.close();
   }
 
-  updateUserImage() {
+  updateUserImage(): void {
     const imageRef = ref(this.fireStorage, `users-avatars/${this.user.uid}`);
     if (this.user.photoURL && !this.user.photoURL.includes("facebook")) {
       deleteObject(imageRef).finally(() => {
@@ -63,7 +63,7 @@ export class EditInfoModalComponent implements OnInit {
     }
   }
 
-  uploadImageToStorage() {
+  uploadImageToStorage(): void {
     const file = this.userAvatar.item(0);
     let url = ref(this.fireStorage, `users-avatars/${this.user.uid}`);
     const metadata = {
@@ -71,7 +71,7 @@ export class EditInfoModalComponent implements OnInit {
     };
     uploadBytes(url, file, metadata).then(
       () => {
-        getDownloadURL(url).then(async (url) => {
+        getDownloadURL(url).then(async (url: string) => {
           this.updatedInfo.value.photoURL = url;
           await this.saveNewUserInfo();
         });

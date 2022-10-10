@@ -12,15 +12,15 @@ export interface Alert {
 export class AlertService {
   public alert$ = new Subject<Alert>();
 
-  success(text: string) {
+  success(text: string): void {
     this.alert$.next({ type: "success", text });
   }
 
-  warning(text: string) {
+  warning(text: string): void {
     this.alert$.next({ type: "warning", text });
   }
 
-  danger(text: string) {
+  danger(text: string): void {
     this.alert$.next({ type: "danger", text });
   }
 }

@@ -18,7 +18,7 @@ export class ContactModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ContactModalComponent>,
-    public postService: PostService,
+    private postService: PostService,
     private alert: AlertService
   ) {
     this.contactsForm = new FormGroup({
@@ -29,11 +29,11 @@ export class ContactModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  closeModal() {
+  closeModal(): void {
     this.dialogRef.close();
   }
 
-  submit() {
+  submit(): void {
     let contactForm: ContactForm = {
       id: this.petId,
       name: this.contactsForm.value.name,

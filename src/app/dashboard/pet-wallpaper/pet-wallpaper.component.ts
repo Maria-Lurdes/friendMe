@@ -10,7 +10,7 @@ export class PetWallpaperComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  scrollToPetList() {
+  scrollToPetList(): void {
     document
       .getElementById("pets-list")
       .scrollIntoView({ behavior: "smooth", block: "start" });

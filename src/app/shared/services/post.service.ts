@@ -49,7 +49,7 @@ export class PostService {
       );
   }
 
-  getImageUrl(data) {
+  getImageUrl(data): void {
     let posts = [...data];
     let fireStorage = getStorage();
     const listRef = ref(fireStorage, `pets-avatars`);

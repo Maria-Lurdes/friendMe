@@ -22,13 +22,13 @@ export class HeaderComponent implements OnInit {
     this.isAdmin = localStorage.getItem("role") === "admin";
   }
 
-  signOut(event: Event) {
+  signOut(event: Event): void {
     event.preventDefault();
     this.auth.signOut();
     this.router.navigate(["/signin"]);
   }
 
-  openFormModal() {
+  openFormModal(): void {
     this.dialog.open(CreateEditPostModalComponent);
   }
 }
