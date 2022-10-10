@@ -34,18 +34,36 @@ export class PetInfoComponent implements OnInit {
           return this.postsService.getById(params["id"]);
         })
       )
-      .subscribe((post: Post) => {
-        this.post = post;
-        this.getImageUrl();
-      });
+      .subscribe(
+        (post: Post) => {
+          this.post = post;
+          this.getImageUrl();
+        },
+        () => {
+          this.post = {
+            age: 0,
+            description: "",
+            name: "",
+            sex: "",
+            type: "",
+            weight: 0,
+            avatar: "",
+          };
+        }
+      );
   }
 
   getImageUrl() {
     let fireStorage = getStorage();
     const pathRef = ref(fireStorage, `pets-avatars/${this.post.id}`);
-    getDownloadURL(pathRef).then((url) => {
-      this.post.avatar = url;
-    });
+    getDownloadURL(pathRef).then(
+      (url) => {
+        this.post.avatar = url;
+      },
+      () => {
+        this.post.avatar = "";
+      }
+    );
   }
 
   openContactFormModal(type) {

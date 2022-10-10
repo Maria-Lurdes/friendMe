@@ -119,9 +119,7 @@ export class PetsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.postService.petPostsArray$.unsubscribe();
     this.petPostsArray$.unsubscribe();
     this.favouritesPetsList$.unsubscribe();
-    // this.authService.favouritesPetsList$.unsubscribe();
   }
 }

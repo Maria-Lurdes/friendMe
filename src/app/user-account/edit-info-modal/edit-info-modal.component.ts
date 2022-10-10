@@ -37,10 +37,6 @@ export class EditInfoModalComponent implements OnInit {
       if (user) {
         this.user = user;
         this.updatedInfo = new FormGroup({
-          email: new FormControl(this.user.email, [
-            Validators.required,
-            Validators.email,
-          ]),
           displayName: new FormControl(this.user.displayName, [
             Validators.required,
           ]),
@@ -106,7 +102,6 @@ export class EditInfoModalComponent implements OnInit {
 
   async saveNewUserInfo() {
     await this.auth.updateUserProfile({
-      email: this.updatedInfo.value.email,
       displayName: this.updatedInfo.value.displayName,
       photoURL: this.updatedInfo.value.photoURL,
     });

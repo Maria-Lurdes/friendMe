@@ -13,7 +13,7 @@ import {
 } from "firebase/auth";
 import { Router } from "@angular/router";
 import { AlertService } from "./alert.service";
-import { LoginInfo, UserAuthInfo } from "../interfaces";
+import { LoginInfo } from "../interfaces";
 import { Subject } from "rxjs";
 import { AuthConstants } from "./auth.constants";
 
@@ -84,7 +84,7 @@ export class AuthService {
     }
   }
 
-  async updateUserProfile(updatedUser: UserAuthInfo) {
+  async updateUserProfile(updatedUser: { displayName: ""; photoURL: "" }) {
     try {
       await updateProfile(this.auth.currentUser, updatedUser);
       const idToken = await this.auth.currentUser.getIdToken();
@@ -109,7 +109,9 @@ export class AuthService {
     try {
       await signInWithEmailAndPassword(this.auth, user.email, user.password);
       await this.setTokenAndNavigate();
-      if (this.auth.currentUser.email === this.constants.ADMIN_EMAIL) {
+      console.log(this.auth.currentUser, "this.auth.currentUser");
+      console.log(this.constants.ADMIN_EMAIL, "this.constants.ADMIN_EMAIL");
+      if (user.email === this.constants.ADMIN_EMAIL) {
         localStorage.setItem("role", "admin");
       } else {
         localStorage.setItem("role", "user");
@@ -125,7 +127,7 @@ export class AuthService {
     this.router.navigate(["/pets-dashboard"]);
   }
 
-  signOut() {
+  signOut(): void {
     this.setToken(null);
   }
 
@@ -133,7 +135,7 @@ export class AuthService {
     return !!this.token;
   }
 
-  setToken(response: string) {
+  setToken(response: string): void {
     if (response) {
       const expDate = new Date(new Date().getTime() + 3600 * 1000);
       localStorage.setItem("fb-token", response);
@@ -144,7 +146,7 @@ export class AuthService {
     }
   }
 
-  setGoogleFacebookToken() {
+  setGoogleFacebookToken(): void {
     this.auth.currentUser.getIdTokenResult().then((result) => {
       const expDate = new Date(new Date().getTime() + 3600 * 1000);
       localStorage.setItem("fb-token", result.token);
@@ -153,7 +155,7 @@ export class AuthService {
     });
   }
 
-  private handleAuthError(errorCode: string) {
+  private handleAuthError(errorCode: string): void {
     switch (errorCode) {
       case "auth/email-already-exists":
         this.alert.danger(

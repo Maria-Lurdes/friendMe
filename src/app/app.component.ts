@@ -19,11 +19,16 @@ export class AppComponent {
     this.checkInternetConnection();
   }
 
-  checkInternetConnection() {
+  checkInternetConnection(): void {
     window.addEventListener("offline", () => {
       this.alert.danger(
         "Ooops! Looks like you're offline. Please, check your internet connection."
       );
+    });
+
+    window.addEventListener("online", () => {
+      // chnage subject online
+      this.alert.success("Your connection is restored");
     });
   }
 }
