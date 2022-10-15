@@ -46,29 +46,28 @@ export class PetInfoComponent implements OnInit, OnDestroy {
   }
 
   getPetById(): void {
-    this.route.params
-      .pipe(
-        switchMap((params: Params) => {
-          return this.postsService.getById(params["id"]);
-        })
-      )
-      .subscribe(
-        (post: Post) => {
+    try {
+      this.route.params
+        .pipe(
+          switchMap((params: Params) => {
+            return this.postsService.getById(params["id"]);
+          })
+        )
+        .subscribe((post: Post) => {
           this.post = post;
           this.getImageUrl();
-        },
-        () => {
-          this.post = {
-            age: 0,
-            description: "",
-            name: "",
-            sex: "",
-            type: "",
-            weight: 0,
-            avatar: "",
-          };
-        }
-      );
+        });
+    } catch {
+      this.post = {
+        age: 0,
+        description: "",
+        name: "",
+        sex: "",
+        type: "",
+        weight: 0,
+        avatar: "",
+      };
+    }
   }
 
   getImageUrl(): void {
