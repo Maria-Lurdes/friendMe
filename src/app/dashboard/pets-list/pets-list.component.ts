@@ -50,7 +50,7 @@ export class PetsListComponent implements OnInit, OnDestroy {
   handleOfflineMode(): void {
     this.offlineMode$ = this.postService.offlineMode$.subscribe(
       (offlineMode: boolean) => {
-        if (offlineMode && !this.posts.length) {
+        if (!offlineMode && !this.posts.length) {
           this.getChosenPets();
           this.getAllPets();
         }

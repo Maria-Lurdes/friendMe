@@ -1,5 +1,5 @@
 <div class="align-wrapper">
-    <mat-card *ngIf="post?.avatar; else loading" class="pet-wrapper">
+    <mat-card *ngIf="post?.hasOwnProperty('avatar'); else loading" class="pet-wrapper">
 
         <img alt="" class="paw1" src="../../../assets/images/lapka.png"/>
         <img alt="" class="paw2" src="../../../assets/images/lapka.png"/>
@@ -10,6 +10,7 @@
         </div>
 
         <img *ngIf="post?.avatar" [src]="post.avatar" alt="" class="pet-avatar"/>
+        <img *ngIf="post?.hasOwnProperty('avatar') && !post?.avatar" src="../../../assets/images/blackKitten.png" alt="" class="pet-avatar"/>
 
         <div class="description-block">
             <div class="top-container">

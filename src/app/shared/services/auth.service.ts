@@ -59,7 +59,6 @@ export class AuthService {
   async googleSignIn() {
     try {
       await signInWithPopup(this.auth, this.googleProvider);
-      console.log(this.auth, "this.auth googleSignIn");
       this.setGoogleFacebookToken();
     } catch (error) {
       this.handleAuthError(error.code);
@@ -69,7 +68,6 @@ export class AuthService {
   async facebookSignIn() {
     try {
       await signInWithPopup(this.auth, this.facebookProvider);
-      console.log(this.auth, "this.auth facebookSignIn");
       this.setGoogleFacebookToken();
     } catch (error) {
       this.handleAuthError(error.code);
@@ -111,9 +109,6 @@ export class AuthService {
     try {
       await signInWithEmailAndPassword(this.auth, user.email, user.password);
       await this.setTokenAndNavigate();
-      console.log(this.auth.currentUser, "this.auth.currentUser");
-      console.log(this.constants.ADMIN_EMAIL, "this.constants.ADMIN_EMAIL");
-      console.log(user.email, "user.email");
       if (user.email === this.constants.ADMIN_EMAIL) {
         localStorage.setItem("role", "admin");
       } else {

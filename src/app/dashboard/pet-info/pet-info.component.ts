@@ -38,7 +38,7 @@ export class PetInfoComponent implements OnInit, OnDestroy {
   handleOfflineMode(): void {
     this.offlineMode$ = this.postService.offlineMode$.subscribe(
       (offlineMode: boolean) => {
-        if (offlineMode && !this.post.name) {
+        if (!offlineMode && !this.post.name) {
           this.getPetById();
         }
       }
@@ -46,28 +46,16 @@ export class PetInfoComponent implements OnInit, OnDestroy {
   }
 
   getPetById(): void {
-    try {
-      this.route.params
-        .pipe(
-          switchMap((params: Params) => {
-            return this.postsService.getById(params["id"]);
-          })
-        )
-        .subscribe((post: Post) => {
-          this.post = post;
-          this.getImageUrl();
-        });
-    } catch {
-      this.post = {
-        age: 0,
-        description: "",
-        name: "",
-        sex: "",
-        type: "",
-        weight: 0,
-        avatar: "",
-      };
-    }
+    this.route.params
+      .pipe(
+        switchMap((params: Params) => {
+          return this.postsService.getById(params["id"]);
+        })
+      )
+      .subscribe((post: Post) => {
+        this.post = post;
+        this.getImageUrl();
+      });
   }
 
   getImageUrl(): void {

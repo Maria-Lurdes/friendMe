@@ -39,7 +39,7 @@ export class FavouritesPetsComponent implements OnInit, OnDestroy {
   handleOfflineMode(): void {
     this.offlineMode$ = this.postService.offlineMode$.subscribe(
       (offlineMode: boolean) => {
-        if (offlineMode && !this.allPetsPosts.length) {
+        if (!offlineMode && !this.allPetsPosts.length) {
           this.getChosenPets();
           this.getAllPets();
         }
