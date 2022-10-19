@@ -38,7 +38,7 @@ export class PetInfoComponent implements OnInit, OnDestroy {
   handleOfflineMode(): void {
     this.offlineMode$ = this.postService.offlineMode$.subscribe(
       (offlineMode: boolean) => {
-        if (!offlineMode && !this.post.name) {
+        if (!offlineMode && !this.post.name.length) {
           this.getPetById();
         }
       }
