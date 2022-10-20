@@ -95,7 +95,7 @@ export class PetsListComponent implements OnInit, OnDestroy {
   }
 
   getPostsByColor(posts): Post[] {
-    let updatedPosts = [];
+    const updatedPosts = [];
     posts.forEach((item: Post, index: number) => {
       let postItem = { ...item };
       if (index === 0) {

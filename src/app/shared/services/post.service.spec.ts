@@ -22,7 +22,7 @@ describe("PostService", () => {
 
   it("get pet by id", () => {
     const post = {
-      age: 2,
+      age: 145,
       description:
         "Tolsona also known as Tiny which is what she response to, is a sweet sweet girl...she is very affectionate. She gets along great with all dogs. She enjoys playing, rough housing , and chilling with you. Tolsona is NOT A CAT girl. She has gone after ours many times. Does great on car rides. Walks calmly on a leash. House and kennel trained, great with kids.",
       name: "Tolsona",
